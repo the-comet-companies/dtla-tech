@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+:root {
+  /* ========== DTLA Print Design System ========== */
+
+  /* Brand */
+  --brand: #F05C4E;
+  --brand-10: rgba(240, 92, 78, 0.1);
+  --brand-12a: #F05C4E1F;
+
+  /* Text */
+  --text: #E8E8ED;
+  --text-secondary: #9CA3AF;
+  --text-white: #FFFFFF;
+  --text-brand: #F05C4E;
+  --text-success: #4ADE80;
+  --text-danger: #F87171;
+  --text-muted: #6B7280;
+
+  /* Backgrounds */
+  --bg-body: #0A0E1A;
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #0F1420;
+  --bg-card: #151C2C;
+  --bg-brand: #F05C4E;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-secondary: rgba(255, 255, 255, 0.06);
+  --border-brand: #F05C4E;
+  --border-primary: rgba(255, 255, 255, 0.12);
+
+  /* Shadows */
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-focus: 0px 0px 0px 4px rgba(240, 92, 78, 0.3);
+
+  /* Radius */
+  --radius-full: 999px;
+  --radius-lg: 40px;
+  --radius-md: 20px;
+  --radius-sm: 16px;
+  --radius-xs: 12px;
+  --radius-2xs: 8px;
+  --radius-3xs: 4px;
+
+  /* Fonts — Poppins + Rubik (DTLA) */
+  --font-display: var(--font-poppins);
+  --font-body: var(--font-poppins);
+  --font-accent: var(--font-rubik);
+
+  /* Container */
+  --container-max-width: 80rem;
+  --container-padding-x: 42px;
+
+  /* Section spacing */
+  --section-padding-y: 5rem;
+}
+
+@theme inline {
+  --color-background: #0A0E1A;
+  --color-foreground: #E8E8ED;
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background-color: #0A0E1A !important;
+  background: #0A0E1A !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--brand);
+  color: white;
+}
+
+/* Noise texture overlay */
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+[data-animate] {
+  will-change: transform, opacity;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(calc(-100% - var(--gap))); }
+  to { transform: translateX(0); }
+}
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1547px) {
+  :root {
+    --container-padding-x: 32px;
+  }
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --container-padding-x: 24px;
+  }
+}
+
+@media (max-width: 719px) {
+  :root {
+    --radius-lg: 16px;
+    --radius-md: 16px;
+    --container-padding-x: 20px;
+    --section-padding-y: 4rem;
+  }
+}
+
+@media (max-width: 479px) {
+  :root {
+    --container-padding-x: 16px;
+    --section-padding-y: 3rem;
+  }
+}
