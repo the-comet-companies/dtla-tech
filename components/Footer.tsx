@@ -1,10 +1,12 @@
+import { footer } from "@/lib/constants";
+
 export default function Footer() {
   return (
     <footer className="w-full py-10 border-t border-white/[0.06]">
       <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <span className="text-base font-bold tracking-tight text-[var(--text)]">
-            DTLA PRINT
+            {footer.brand}
           </span>
           <span className="text-sm text-[var(--text-muted)]">
             &copy; {new Date().getFullYear()}
@@ -12,18 +14,18 @@ export default function Footer() {
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <a
-            href="https://dtlaprint.com"
+            href={footer.siteUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors duration-200"
           >
-            dtlaprint.com
+            {footer.siteLabel}
           </a>
           <a
-            href="#interest-form"
+            href={footer.ctaHref}
             className="group text-sm text-[var(--text-secondary)] hover:text-[var(--brand)] transition-colors duration-200 flex items-center gap-1.5"
           >
-            Interested in our tech stack?
+            {footer.ctaText}
             <svg
               className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
               fill="none"

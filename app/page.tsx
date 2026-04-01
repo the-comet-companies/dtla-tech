@@ -5,6 +5,8 @@ import TwoPaths from "@/components/TwoPaths";
 import TabbedFeatures from "@/components/TabbedFeatures";
 import Problems from "@/components/Problems";
 import WhatsAvailable from "@/components/WhatsAvailable";
+import SolutionsDemo from "@/components/SolutionsDemo";
+import SocialProof from "@/components/SocialProof";
 import FeatureCards from "@/components/FeatureCards";
 import BuiltByOperators from "@/components/BuiltByOperators";
 import WhoThisIsFor from "@/components/WhoThisIsFor";
@@ -23,9 +25,11 @@ export default function Home() {
         <Problems />
         <TwoPaths />
         <TabbedFeatures />
+        <SolutionsDemo />
         <WhatsAvailable />
         <FeatureCards />
         <BuiltByOperators />
+        <SocialProof />
         <WhoThisIsFor />
         <TechStack />
         <InterestForm />

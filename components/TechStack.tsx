@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { techStackSection, techStackCards } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import InteractiveHoverButton from "./InteractiveHoverButton";
 
@@ -22,76 +23,7 @@ interface BentoCardData {
   className: string;
 }
 
-const cards: BentoCardData[] = [
-  {
-    title: "Payments via Stripe",
-    description:
-      "Accept every major payment method. Credit cards, digital wallets, and buy-now-pay-later — all through one integration.",
-    logos: [
-      { src: "/logos/payments/visa.svg", alt: "Visa" },
-      { src: "/logos/payments/mastercard.svg", alt: "Mastercard" },
-      { src: "/logos/payments/amex.svg", alt: "AMEX" },
-      { src: "/logos/payments/discover.svg", alt: "Discover" },
-      { src: "/logos/payments/paypal.svg", alt: "PayPal" },
-      { src: "/logos/payments/apple-pay.svg", alt: "Apple Pay" },
-      { src: "/logos/payments/google-pay.svg", alt: "Google Pay" },
-      { src: "/logos/payments/stripe-link.svg", alt: "Stripe Link" },
-      { src: "/logos/payments/affirm.svg", alt: "Affirm" },
-      { src: "/logos/payments/klarna.svg", alt: "Klarna" },
-    ],
-    className: "col-span-1 lg:col-span-2",
-  },
-  {
-    title: "Shipping & Logistics",
-    description:
-      "Live rates, label generation, and tracking from every major carrier — powered by ShipStation.",
-    logos: [
-      { src: "/logos/shipping/ups.svg", alt: "UPS" },
-      { src: "/logos/shipping/fedex.svg", alt: "FedEx" },
-      { src: "/logos/shipping/usps.svg", alt: "USPS" },
-      { src: "/logos/shipping/dhl.svg", alt: "DHL" },
-      { src: "/logos/shipping/amazon.svg", alt: "Amazon" },
-      { src: "/logos/shipping/shipwire.svg", alt: "ShipWire" },
-    ],
-    className: "col-span-1 lg:col-span-1",
-  },
-  {
-    title: "Automations",
-    description:
-      "Connect to any tool in your stack with pre-built workflow automations.",
-    logos: [
-      { src: "/logos/tools/n8n.svg", alt: "n8n" },
-      { src: "/logos/tools/zapier.svg", alt: "Zapier" },
-      { src: "/logos/tools/make.svg", alt: "Make" },
-    ],
-    className: "col-span-1 lg:col-span-1",
-  },
-  {
-    title: "eCommerce Platforms",
-    description:
-      "Sync orders and products across every major marketplace and storefront.",
-    logos: [
-      { src: "/logos/integrations/shopify.svg", alt: "Shopify" },
-      { src: "/logos/integrations/woocommerce.svg", alt: "WooCommerce" },
-      { src: "/logos/integrations/amazon.svg", alt: "Amazon" },
-      { src: "/logos/integrations/etsy.svg", alt: "Etsy" },
-      { src: "/logos/integrations/ebay.svg", alt: "eBay" },
-      { src: "/logos/integrations/faire.svg", alt: "Faire" },
-      { src: "/logos/integrations/fashion-go.svg", alt: "Fashion Go" },
-      { src: "/logos/integrations/google-merchant-center.svg", alt: "Google Merchant Center" },
-    ],
-    className: "col-span-1 lg:col-span-2",
-  },
-  {
-    title: "Cloud Infrastructure",
-    description:
-      "Enterprise-grade hosting on AWS S3. Hourly backups, nightly save states, and 24/7 uptime monitoring.",
-    logos: [
-      { src: "/logos/storage/amazonS3.svg", alt: "Amazon S3" },
-    ],
-    className: "col-span-1 lg:col-span-3",
-  },
-];
+const cards: BentoCardData[] = techStackCards;
 
 function BentoCard({ title, description, logos, className }: BentoCardData) {
   const isFullWidth = className.includes("col-span-3");
@@ -199,9 +131,9 @@ export default function TechStack() {
       <div className="w-full px-[var(--container-padding-x)]">
         <div className="text-center mb-14 max-w-[80rem] mx-auto">
           <SectionHeading
-            label="Integrations & Infrastructure"
-            title="Powered by the tools you trust"
-            subtitle="Every integration is pre-built and battle-tested. Plug in and go."
+            label={techStackSection.label}
+            title={techStackSection.title}
+            subtitle={techStackSection.subtitle}
           />
         </div>
 
@@ -216,8 +148,8 @@ export default function TechStack() {
         </div>
 
         <div className="flex justify-center mt-10 max-w-[80rem] mx-auto">
-          <InteractiveHoverButton href="#interest-form" variant="primary">
-            Request Early Access
+          <InteractiveHoverButton href={techStackSection.cta.href} variant="primary">
+            {techStackSection.cta.text}
           </InteractiveHoverButton>
         </div>
       </div>

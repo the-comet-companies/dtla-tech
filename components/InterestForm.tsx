@@ -2,35 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { submitStep1, submitStep2 } from "@/app/actions";
-import { interestOptions, shopTypeOptions, orderVolumeOptions } from "@/lib/constants";
+import { differenceSection, differenceItems, interestFormSection, interestOptions, shopTypeOptions, orderVolumeOptions } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
-
-const differenceItems = [
-  {
-    title: "We Don\u2019t Cookie Cut",
-    desc: "Each project is unique and requires its own process. Depending on the desired product we will customize the inks and process for each order.",
-  },
-  {
-    title: "Innovative Ideas",
-    desc: "DTLA Print is proud to be a leading partner in the promotional products + fashion industry. With unique ideas + out of the box printing methods.",
-  },
-  {
-    title: "We Stand Behind Our Work",
-    desc: "Our main goal is to provide peace of mind so you can relax and have confidence that your job will come out exactly as you had imagined.",
-  },
-  {
-    title: "Quality Over Quantity",
-    desc: "DTLA Print believes in quality over quantity and we want our customers to feel the same way.",
-  },
-  {
-    title: "Dedicated Reps",
-    desc: "Each account receives a dedicated rep who can be reached face to face by phone or via e-mail.",
-  },
-  {
-    title: "Long Lasting Relationships",
-    desc: "We value all of our clients and aim to solidify long lasting & mutually beneficial relationships.",
-  },
-];
 
 export default function InterestForm() {
   const [step, setStep] = useState(1);
@@ -79,9 +52,9 @@ export default function InterestForm() {
         <div className="mb-24" data-scroll-section>
           <div className="text-center mb-16" data-scroll-heading>
             <SectionHeading
-              label="What We Offer"
-              title="The DTLA Print Difference"
-              subtitle="DTLA Print was created to provide helpful service, simple streamlined ordering & eco-friendly options. A company with transparent prices & ethics, a company who aims to create good things."
+              label={differenceSection.label}
+              title={differenceSection.title}
+              subtitle={differenceSection.subtitle}
             />
           </div>
 
@@ -105,9 +78,9 @@ export default function InterestForm() {
         <div className="max-w-xl mx-auto">
           <div className="text-center mb-12" data-animate="fade-up">
             <SectionHeading
-              label="Get Started"
-              title="Request early access"
-              subtitle="Tell us about your shop and we'll be in touch to discuss how our technology can work for you."
+              label={interestFormSection.label}
+              title={interestFormSection.title}
+              subtitle={interestFormSection.subtitle}
             />
           </div>
 
@@ -122,10 +95,10 @@ export default function InterestForm() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-[var(--text)] mb-3">
-                You&apos;re on the list
+                {interestFormSection.successTitle}
               </h3>
               <p className="text-[0.9375rem] text-[var(--text)] opacity-75">
-                We&apos;ll be in touch within 24 hours to discuss next steps.
+                {interestFormSection.successMessage}
               </p>
             </div>
           ) : (

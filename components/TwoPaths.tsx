@@ -3,45 +3,13 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { twoPathsSection, workflowSteps } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import Marquee from "./Marquee";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const workflowSteps = [
-  {
-    number: "01",
-    label: "Intake",
-    description: "Order arrives via website or manual entry",
-    side: "both" as const,
-  },
-  {
-    number: "02",
-    label: "Proofing",
-    description: "Art preview with approval / rejection workflow",
-    side: "both" as const,
-  },
-  {
-    number: "03",
-    label: "Production",
-    description: "Jobs routed to machines, tracked in real time",
-    side: "backend" as const,
-  },
-  {
-    number: "04",
-    label: "Fulfillment",
-    description: "Shipping labels generated, carriers integrated",
-    side: "backend" as const,
-  },
-  {
-    number: "05",
-    label: "Updates",
-    description: "Automated customer notifications & status updates",
-    side: "both" as const,
-  },
-];
 
 export default function TwoPaths() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -93,9 +61,9 @@ export default function TwoPaths() {
       <div className="w-full px-[var(--container-padding-x)]" data-scroll-content>
         <div className="text-center mb-16 max-w-[80rem] mx-auto" data-scroll-heading>
           <SectionHeading
-            label="The Connected Workflow"
-            title="Every stage. One system."
-            subtitle="From the first order to the final shipment — see how both sides of the platform work together."
+            label={twoPathsSection.label}
+            title={twoPathsSection.title}
+            subtitle={twoPathsSection.subtitle}
           />
         </div>
 
@@ -114,11 +82,11 @@ export default function TwoPaths() {
 
             {/* Header */}
             <div className="text-center mb-2">
-              <p className="text-xs uppercase tracking-widest text-[var(--text-muted)]">Front End</p>
-              <h3 className="text-lg font-bold text-[var(--text)]">What Your Customers See</h3>
+              <p className="text-xs uppercase tracking-widest text-[var(--text-muted)]">{twoPathsSection.frontend.tag}</p>
+              <h3 className="text-lg font-bold text-[var(--text)]">{twoPathsSection.frontend.title}</h3>
             </div>
             <p className="text-sm text-[var(--text-secondary)] mb-6">
-              The storefront, configurator, and portal your customers interact with — ordering, approving art, and tracking shipments.
+              {twoPathsSection.frontend.description}
             </p>
 
             {/* Workflow steps relevant to front end */}
@@ -137,7 +105,7 @@ export default function TwoPaths() {
             {/* Marquee — customer-facing touchpoints */}
             <div className="space-y-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <Marquee pauseOnHover className="[--duration:22s]">
-                {["Browse products", "Upload artwork", "Approve proofs", "Track orders", "Manage account", "Reorder"].map((item) => (
+                {twoPathsSection.frontend.marqueeItems.map((item) => (
                   <span key={item} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[var(--border)] bg-white/[0.04] text-sm text-[var(--text)] opacity-75 whitespace-nowrap">
                     {item}
                   </span>
@@ -160,11 +128,11 @@ export default function TwoPaths() {
 
             {/* Header */}
             <div className="text-center mb-2">
-              <p className="text-xs uppercase tracking-widest text-white/40">Back Office</p>
-              <h3 className="text-lg font-bold text-white">What You Control</h3>
+              <p className="text-xs uppercase tracking-widest text-white/40">{twoPathsSection.backend.tag}</p>
+              <h3 className="text-lg font-bold text-white">{twoPathsSection.backend.title}</h3>
             </div>
             <p className="text-sm text-white/50 mb-6">
-              The engine behind every order — quoting, scheduling, production tracking, invoicing, and shipping from a single dashboard.
+              {twoPathsSection.backend.description}
             </p>
 
             {/* Workflow steps relevant to back end */}
@@ -183,7 +151,7 @@ export default function TwoPaths() {
             {/* Marquee — back-office operations */}
             <div className="space-y-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <Marquee pauseOnHover reverse className="[--duration:22s]">
-                {["Route jobs", "Generate invoices", "Schedule machines", "Print labels", "Track production", "Manage vendors"].map((item) => (
+                {twoPathsSection.backend.marqueeItems.map((item) => (
                   <span key={item} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.04] text-sm text-white/60 whitespace-nowrap">
                     {item}
                   </span>

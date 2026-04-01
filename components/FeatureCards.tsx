@@ -1,4 +1,4 @@
-import { features } from "@/lib/constants";
+import { features, featuresSection } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import InteractiveHoverButton from "./InteractiveHoverButton";
 
@@ -13,9 +13,9 @@ export default function FeatureCards() {
       <div className="w-full px-[var(--container-padding-x)]" data-scroll-content>
         <div className="max-w-[80rem] mx-auto" data-scroll-heading>
           <SectionHeading
-            label="Features"
-            title="Built for production shops"
-            subtitle="Every feature was built to solve a real problem we faced running DTLA Print."
+            label={featuresSection.label}
+            title={featuresSection.title}
+            subtitle={featuresSection.subtitle}
           />
         </div>
 
@@ -129,8 +129,8 @@ export default function FeatureCards() {
         </div>
 
         <div className="flex justify-center mt-10" data-scroll-item>
-          <InteractiveHoverButton href="#interest-form" variant="outline">
-            Get Started With These Features
+          <InteractiveHoverButton href={featuresSection.cta.href} variant="outline">
+            {featuresSection.cta.text}
           </InteractiveHoverButton>
         </div>
       </div>

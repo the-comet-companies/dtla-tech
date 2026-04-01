@@ -1,4 +1,4 @@
-import { offerings } from "@/lib/constants";
+import { offerings, whatsAvailableSection } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import InteractiveHoverButton from "./InteractiveHoverButton";
 
@@ -12,9 +12,9 @@ export default function WhatsAvailable() {
       <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]" data-scroll-content>
         <div data-scroll-heading>
           <SectionHeading
-            label="What You Get"
-            title="Choose what you need"
-            subtitle="License our FileMaker back end, our website technology, or get the full stack with automatic integrations."
+            label={whatsAvailableSection.label}
+            title={whatsAvailableSection.title}
+            subtitle={whatsAvailableSection.subtitle}
           />
         </div>
 
@@ -58,8 +58,8 @@ export default function WhatsAvailable() {
         </div>
 
         <div className="flex justify-center mt-10" data-scroll-item>
-          <InteractiveHoverButton href="#interest-form" variant="primary">
-            Request Early Access
+          <InteractiveHoverButton href={whatsAvailableSection.cta.href} variant="primary">
+            {whatsAvailableSection.cta.text}
           </InteractiveHoverButton>
         </div>
       </div>

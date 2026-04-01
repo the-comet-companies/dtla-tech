@@ -1,14 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-const navLinks = [
-  { label: "Problem", href: "#problem" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Features", href: "#features" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#interest-form" },
-];
+import { navLinks, navBrand } from "@/lib/constants";
 
 export default function Navbar() {
   const [active, setActive] = useState("");
@@ -74,7 +67,7 @@ export default function Navbar() {
           }`}
         >
           <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)]">
-            DTLA
+            {navBrand.desktop}
           </a>
 
           <div className="w-px h-4 bg-[var(--border)] mx-1" />
@@ -109,7 +102,7 @@ export default function Navbar() {
             className="text-base font-bold tracking-tight text-[var(--text)]"
             onClick={handleLinkClick}
           >
-            DTLA Print
+            {navBrand.mobile}
           </a>
 
           <button
@@ -179,7 +172,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href="#interest-form"
+            href={navBrand.ctaHref}
             onClick={handleLinkClick}
             className="group/btn mt-6 relative overflow-hidden inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] transition-all duration-300"
             style={{
@@ -191,11 +184,11 @@ export default function Navbar() {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[var(--bg-body)] opacity-0 transition-all duration-500 group-hover/btn:scale-[100] group-hover/btn:opacity-100" />
             <div className="flex items-center justify-center">
               <span className="inline-block transition-all duration-300 group-hover/btn:translate-x-12 group-hover/btn:opacity-0">
-                Request Early Access
+                {navBrand.ctaText}
               </span>
             </div>
             <div className="absolute top-0 left-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-[var(--brand)] opacity-0 transition-all duration-300 group-hover/btn:translate-x-0 group-hover/btn:opacity-100">
-              <span>Request Early Access</span>
+              <span>{navBrand.ctaText}</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

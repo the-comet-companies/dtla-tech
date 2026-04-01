@@ -1,5 +1,6 @@
 "use client";
 
+import { hero } from "@/lib/constants";
 import HeroBento from "./HeroBento";
 import StripedPattern from "./StripedPattern";
 import CircuitLines from "./CircuitLines";
@@ -48,7 +49,7 @@ export default function Hero() {
             <div className="mb-8" data-hero="tag" style={{ opacity: 0 }}>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] text-sm font-medium text-white">
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                From the team at DTLA Print
+                {hero.badge}
               </span>
             </div>
 
@@ -57,11 +58,11 @@ export default function Hero() {
               style={{ opacity: 0 }}
               data-hero="heading"
             >
-              Power Your Shop
+              {hero.headingLine1}
               <br />
-              With Our{" "}
+              {hero.headingLine2}{" "}
               <MorphingText
-                texts={["Tech Stack", "Back Office", "Website", "AI Agents", "Platform"]}
+                texts={hero.morphingWords}
                 className="text-[var(--brand)]"
               />
             </h1>
@@ -71,16 +72,15 @@ export default function Hero() {
               data-hero="sub"
               style={{ opacity: 0 }}
             >
-              License the same FileMaker backend and/or website technology that
-              powers DTLA Print — battle-tested on thousands of real orders.
+              {hero.subtitle}
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-3" data-hero="ctas" style={{ opacity: 0 }}>
-              <InteractiveHoverButton href="#interest-form" variant="primary">
-                Request Early Access
+              <InteractiveHoverButton href={hero.ctaPrimary.href} variant="primary">
+                {hero.ctaPrimary.text}
               </InteractiveHoverButton>
-              <InteractiveHoverButton href="#solutions" variant="outline">
-                See How It Works
+              <InteractiveHoverButton href={hero.ctaSecondary.href} variant="outline">
+                {hero.ctaSecondary.text}
               </InteractiveHoverButton>
             </div>
           </div>
