@@ -96,7 +96,7 @@ export default function TabbedFeatures() {
     <section
       ref={sectionRef}
       id="solutions"
-      className="w-full bg-[var(--bg-secondary)]"
+      className="w-full bg-[var(--bg-body)]"
     >
       <div className="w-full px-[var(--container-padding-x)] py-[var(--section-padding-y)]">
         {/* Heading */}
@@ -111,7 +111,7 @@ export default function TabbedFeatures() {
         {/* Tab toggle */}
         <div className="flex justify-center mb-14">
           <div
-            className="relative inline-flex rounded-full p-1 bg-white/[0.06] border border-[var(--border)]"
+            className="relative inline-flex rounded-full p-1 bg-black/[0.03] border border-[var(--structural-border)]"
           >
             {(["website", "filemaker"] as Tab[]).map((tab) => {
               const isActive = tab === activeTab;
@@ -122,7 +122,7 @@ export default function TabbedFeatures() {
                   className="relative z-10 flex items-center gap-2 px-6 py-3 rounded-full text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer"
                   style={{
                     backgroundColor: isActive ? "var(--brand)" : "transparent",
-                    color: isActive ? "white" : "rgba(255,255,255,0.5)",
+                    color: isActive ? "white" : "var(--text-secondary)",
                   }}
                 >
                   {tabMeta[tab].icon}
@@ -145,19 +145,19 @@ export default function TabbedFeatures() {
             <div
               key={`${activeTab}-${i}`}
               data-tab-card
-              className="group rounded-[16px] p-7 flex flex-col transition-all duration-300 bg-[var(--bg-card)] border border-[var(--border)] hover:bg-white hover:border-white hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+              className="group rounded-[16px] p-7 flex flex-col transition-all duration-300 bg-[var(--bg-card)] border border-[var(--structural-border)] hover:border-black/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
             >
               {/* Number badge */}
               <div
-                className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold mb-5 shrink-0 bg-[var(--brand-10)] text-[var(--brand)] transition-colors duration-300 group-hover:bg-[#0A0E1A]/10 group-hover:text-[#0A0E1A]"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold mb-5 shrink-0 bg-[var(--brand-10)] text-[var(--brand)] transition-colors duration-300"
               >
                 {i + 1}
               </div>
 
-              <h3 className="text-[1.0625rem] font-bold leading-tight mb-2 text-[var(--text)] transition-colors duration-300 group-hover:text-[#0A0E1A]">
+              <h3 className="text-[1.0625rem] font-bold leading-tight mb-2 text-[var(--text)] transition-colors duration-300">
                 {feature.title}
               </h3>
-              <p className="text-[0.875rem] leading-relaxed text-[var(--text-secondary)] transition-colors duration-300 group-hover:text-[#0A0E1A]/70">
+              <p className="text-[0.875rem] leading-relaxed text-[var(--text-secondary)] transition-colors duration-300">
                 {feature.description}
               </p>
             </div>

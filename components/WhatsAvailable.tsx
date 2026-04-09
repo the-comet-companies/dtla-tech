@@ -6,7 +6,7 @@ export default function WhatsAvailable() {
   return (
     <section
       id="whats-available"
-      className="w-full py-[var(--section-padding-y)]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)]"
       data-scroll-section
     >
       <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]" data-scroll-content>

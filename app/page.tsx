@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import TwoPaths from "@/components/TwoPaths";
 import TabbedFeatures from "@/components/TabbedFeatures";
 import Problems from "@/components/Problems";
+import AIPlatform from "@/components/AIPlatform";
 import WhatsAvailable from "@/components/WhatsAvailable";
 import SolutionsDemo from "@/components/SolutionsDemo";
 import SocialProof from "@/components/SocialProof";
@@ -26,6 +27,7 @@ export default function Home() {
         <TwoPaths />
         <TabbedFeatures />
         <SolutionsDemo />
+        <AIPlatform />
         <WhatsAvailable />
         <FeatureCards />
         <BuiltByOperators />

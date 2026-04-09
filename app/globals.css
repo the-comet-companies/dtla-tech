@@ -4,35 +4,36 @@
   /* ========== DTLA Print Design System ========== */
 
   /* Brand */
-  --brand: #F05C4E;
-  --brand-10: rgba(240, 92, 78, 0.1);
-  --brand-12a: #F05C4E1F;
+  --brand: #0066CC;
+  --brand-10: rgba(0, 102, 204, 0.1);
+  --brand-12a: #0066CC1F;
 
   /* Text */
-  --text: #E8E8ED;
-  --text-secondary: #9CA3AF;
+  --text: #1D1D1F;
+  --text-secondary: #6E6E73;
   --text-white: #FFFFFF;
-  --text-brand: #F05C4E;
-  --text-success: #4ADE80;
-  --text-danger: #F87171;
-  --text-muted: #6B7280;
+  --text-brand: #0066CC;
+  --text-success: #16a34a;
+  --text-danger: #dc2626;
+  --text-muted: #9CA3AF;
 
   /* Backgrounds */
-  --bg-body: #0A0E1A;
-  --bg-primary: #0A0E1A;
-  --bg-secondary: #0F1420;
-  --bg-card: #151C2C;
-  --bg-brand: #F05C4E;
+  --bg-body: #FBFBFB;
+  --bg-primary: #FBFBFB;
+  --bg-secondary: #F5F5F7;
+  --bg-card: #FFFFFF;
+  --bg-brand: #0066CC;
 
   /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-secondary: rgba(255, 255, 255, 0.06);
-  --border-brand: #F05C4E;
-  --border-primary: rgba(255, 255, 255, 0.12);
+  --border: #E5E7EB;
+  --border-secondary: rgba(0, 0, 0, 0.06);
+  --border-brand: #0066CC;
+  --border-primary: rgba(0, 0, 0, 0.12);
+  --structural-border: #E5E7EB;
 
   /* Shadows */
-  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-focus: 0px 0px 0px 4px rgba(240, 92, 78, 0.3);
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-focus: 0px 0px 0px 4px rgba(0, 102, 204, 0.3);
 
   /* Radius */
   --radius-full: 999px;
@@ -43,10 +44,10 @@
   --radius-2xs: 8px;
   --radius-3xs: 4px;
 
-  /* Fonts — Poppins + Rubik (DTLA) */
-  --font-display: var(--font-poppins);
-  --font-body: var(--font-poppins);
-  --font-accent: var(--font-rubik);
+  /* Fonts — Inter + Crimson Pro (matching Shop Titan) */
+  --font-display: var(--font-inter);
+  --font-body: var(--font-inter);
+  --font-accent: var(--font-crimson);
 
   /* Container */
   --container-max-width: 80rem;
@@ -57,10 +58,10 @@
 }
 
 @theme inline {
-  --color-background: #0A0E1A;
-  --color-foreground: #E8E8ED;
-  --font-sans: var(--font-poppins);
-  --font-mono: var(--font-poppins);
+  --color-background: #FBFBFB;
+  --color-foreground: #1D1D1F;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
 }
 
 * {
@@ -70,8 +71,8 @@
 
 html,
 body {
-  background-color: #0A0E1A !important;
-  background: #0A0E1A !important;
+  background-color: #FBFBFB !important;
+  background: #FBFBFB !important;
 }
 
 html {
@@ -82,11 +83,15 @@ body {
   color: var(--text);
   font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
+  background-image:
+    linear-gradient(to right, rgba(0, 102, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 102, 204, 0.03) 1px, transparent 1px);
+  background-size: 140px 140px;
 }
 
 ::selection {
-  background: var(--brand);
-  color: white;
+  background: rgba(0, 102, 204, 0.3);
+  color: var(--text);
 }
 
 /* Noise texture overlay */
@@ -128,8 +133,8 @@ body {
 
 /* Number badge red glow pulse */
 @keyframes problemPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(240, 92, 78, 0); }
-  50%      { box-shadow: 0 0 16px 4px rgba(240, 92, 78, 0.25); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0); }
+  50%      { box-shadow: 0 0 16px 4px rgba(0, 102, 204, 0.25); }
 }
 
 /* Title glitch flicker */
@@ -178,12 +183,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 /* ========== Responsive ========== */

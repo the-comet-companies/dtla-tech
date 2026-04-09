@@ -7,7 +7,7 @@ export default function FeatureCards() {
   return (
     <section
       id="features"
-      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-body)]"
       data-scroll-section
     >
       <div className="w-full px-[var(--container-padding-x)]" data-scroll-content>

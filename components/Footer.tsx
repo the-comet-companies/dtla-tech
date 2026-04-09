@@ -2,7 +2,7 @@ import { footer } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-10 border-t border-white/[0.06]">
+    <footer className="w-full py-10 border-t border-[var(--structural-border)]">
       <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <span className="text-base font-bold tracking-tight text-[var(--text)]">

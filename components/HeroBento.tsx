@@ -87,7 +87,7 @@ export default function HeroBento() {
       {cards.map((card) => (
         <div
           key={card.title}
-          className={`group relative overflow-hidden rounded-[14px] border border-white/[0.06] bg-[var(--bg-card)] transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${card.className}`}
+          className={`group relative overflow-hidden rounded-[14px] border border-black/[0.06] bg-[var(--bg-card)] transition-all duration-500 hover:border-black/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] ${card.className}`}
         >
           {card.type === "logos" ? (
             <>
@@ -106,8 +106,8 @@ export default function HeroBento() {
 
               {/* Text anchored to bottom */}
               <div className="relative z-10 flex h-full min-h-[140px] flex-col justify-end p-5">
-                <h3 className="text-sm font-bold text-white mb-0.5">{card.title}</h3>
-                <p className="text-[11px] leading-relaxed text-white/35">{card.description}</p>
+                <h3 className="text-sm font-bold text-[var(--text)] mb-0.5">{card.title}</h3>
+                <p className="text-[11px] leading-relaxed text-[var(--text-secondary)]">{card.description}</p>
               </div>
             </>
           ) : (
@@ -116,12 +116,12 @@ export default function HeroBento() {
                 <div className="w-8 h-8 rounded-lg bg-[var(--brand-10)] text-[var(--brand)] flex items-center justify-center mb-3">
                   {card.icon}
                 </div>
-                <h3 className="text-sm font-bold text-white mb-1">{card.title}</h3>
+                <h3 className="text-sm font-bold text-[var(--text)] mb-1">{card.title}</h3>
               </div>
               {card.bullets && (
                 <ul className="mt-2 space-y-1">
                   {card.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-1.5 text-[11px] text-white/30">
+                    <li key={b} className="flex items-center gap-1.5 text-[11px] text-[var(--text-secondary)]">
                       <svg className="w-3 h-3 shrink-0 text-[var(--brand)] opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>

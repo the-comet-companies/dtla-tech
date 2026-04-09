@@ -8,64 +8,36 @@ interface Testimonial {
   quote: string;
   name: string;
   role: string;
-  avatarSrc?: string;
+  company: string;
 }
 
 const AUTO_CYCLE_MS = 5000;
 
-/* ── Background card (small, dimmed) ── */
+/* ── Background card (small, uniform opacity — no active state) ── */
 function BackgroundCard({
   testimonial,
-  isActive,
   onClick,
 }: {
   testimonial: Testimonial;
-  isActive: boolean;
   onClick: () => void;
 }) {
-  const isEmpty = !testimonial.quote;
-
   return (
     <button
       onClick={onClick}
-      className="text-left rounded-[var(--radius-sm)] border bg-[var(--bg-card)] p-6 flex flex-col justify-between min-h-[180px] transition-all duration-500 cursor-pointer w-full"
-      style={{
-        borderColor: isActive
-          ? "rgba(255,255,255,0.18)"
-          : "rgba(255,255,255,0.08)",
-        opacity: isActive ? 0.5 : 0.2,
-      }}
+      className="text-left rounded-[var(--radius-sm)] border border-[var(--structural-border)] bg-[var(--bg-card)] p-6 flex flex-col justify-between min-h-[180px] transition-all duration-500 cursor-pointer w-full opacity-30 blur-[2px]"
     >
-      {isEmpty ? (
-        /* Skeleton lines */
-        <div className="space-y-2.5 mb-6">
-          <div className="h-2.5 rounded-full bg-white/[0.12] w-full" />
-          <div className="h-2.5 rounded-full bg-white/[0.12] w-[85%]" />
-          <div className="h-2.5 rounded-full bg-white/[0.10] w-[70%]" />
-        </div>
-      ) : (
-        <p className="text-[0.8125rem] leading-relaxed text-[var(--text)] line-clamp-3 mb-6">
-          {testimonial.quote}
-        </p>
-      )}
+      <p className="text-[0.8125rem] leading-relaxed text-[var(--text)] line-clamp-3 mb-6">
+        {testimonial.quote}
+      </p>
 
-      {/* Avatar + name */}
       <div className="flex items-center gap-2.5 mt-auto">
-        {testimonial.avatarSrc ? (
-          <img
-            src={testimonial.avatarSrc}
-            alt={testimonial.name}
-            className="w-8 h-8 rounded-full object-cover shrink-0"
-          />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-white/[0.12] shrink-0" />
-        )}
+        <div className="w-8 h-8 rounded-full bg-black/[0.06] shrink-0" />
         <div>
           <p className="text-xs font-semibold text-[var(--text)]">
             {testimonial.name}
           </p>
           <p className="text-[0.6875rem] text-[var(--text-secondary)]">
-            {testimonial.role}
+            {testimonial.role}, {testimonial.company}
           </p>
         </div>
       </div>
@@ -87,16 +59,15 @@ export default function SocialProof() {
   }, [next]);
 
   const active = testimonials[activeIndex];
-  const isEmpty = !active.quote;
 
-  // Split cards into top row (0-2) and bottom row (3-5)
+  // Split cards: top row 3, bottom row 2
   const topRow = testimonials.slice(0, 3);
-  const bottomRow = testimonials.slice(3, 6);
+  const bottomRow = testimonials.slice(3, 5);
 
   return (
     <section
       id="social-proof"
-      className="w-full bg-[var(--bg-secondary)] overflow-hidden"
+      className="w-full bg-[var(--bg-body)] overflow-hidden"
       data-scroll-section
     >
       <div
@@ -115,98 +86,83 @@ export default function SocialProof() {
         {/* Main layout: cards grid with centered spotlight overlay */}
         <div className="relative" data-animate="fade-up">
           {/* ── Background card grid ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {/* Top row */}
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-4">
+            {/* Top row — 3 cards spanning 2 cols each */}
             {topRow.map((t, i) => (
-              <BackgroundCard
-                key={i}
-                testimonial={t}
-                isActive={i === activeIndex}
-                onClick={() => setActiveIndex(i)}
-              />
+              <div key={i} className="sm:col-span-2">
+                <BackgroundCard
+                  testimonial={t}
+                  onClick={() => setActiveIndex(i)}
+                />
+              </div>
             ))}
 
-            {/* Bottom row */}
+            {/* Bottom row — 2 cards centered (offset by 1 col each side) */}
             {bottomRow.map((t, i) => (
-              <BackgroundCard
-                key={i + 3}
-                testimonial={t}
-                isActive={i + 3 === activeIndex}
-                onClick={() => setActiveIndex(i + 3)}
-              />
+              <div key={i + 3} className={`sm:col-span-2 ${i === 0 ? "sm:col-start-2" : ""}`}>
+                <BackgroundCard
+                  testimonial={t}
+                  onClick={() => setActiveIndex(i + 3)}
+                />
+              </div>
             ))}
           </div>
 
           {/* ── Center spotlight overlay ── */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* Dome / arc glow */}
-            <div className="relative w-full max-w-[560px] flex flex-col items-center">
+            <div className="relative w-full max-w-[640px] flex flex-col items-center">
               {/* Radial dome shape */}
               <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[640px] h-[320px] rounded-t-full"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-t-full"
                 style={{
                   background:
-                    "radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)",
+                    "radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.02) 40%, transparent 70%)",
                 }}
               />
-              {/* Hard edge line at dome base */}
               <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[640px] h-px"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-px"
                 style={{
                   background:
-                    "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.18) 70%, transparent 100%)",
+                    "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.08) 70%, transparent 100%)",
                 }}
               />
 
               {/* Avatar */}
-              <div className="relative z-10 mb-6">
-                {active.avatarSrc ? (
-                  <img
-                    src={active.avatarSrc}
-                    alt={active.name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-white/20 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
-                  />
-                ) : (
-                  <div className="w-16 h-16 rounded-full bg-[var(--bg-card)] border-2 border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                  </div>
-                )}
+              <div className="relative z-10 mb-8">
+                <div className="w-16 h-16 rounded-full bg-[var(--bg-card)] border-2 border-[var(--structural-border)] shadow-[0_0_40px_rgba(0,0,0,0.08)] flex items-center justify-center">
+                  <svg className="w-6 h-6 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                </div>
               </div>
 
-              {/* Featured quote */}
-              <div className="relative z-10 text-center px-4 mb-6">
-                {isEmpty ? (
-                  <p className="text-lg md:text-xl font-semibold leading-snug text-white/70 italic">
-                    &ldquo;{socialProofSection.placeholderQuote}&rdquo;
-                  </p>
-                ) : (
-                  <p className="text-lg md:text-xl font-semibold leading-snug text-white">
-                    {active.quote}
-                  </p>
-                )}
+              {/* Featured quote — bigger text */}
+              <div className="relative z-10 text-center px-4 mb-8">
+                <p className="text-xl md:text-2xl lg:text-[1.75rem] font-semibold leading-[1.4] text-[var(--text)]">
+                  &ldquo;{active.quote}&rdquo;
+                </p>
               </div>
 
-              {/* Sliding dot indicators — active always centered */}
+              {/* Author info */}
+              <div className="relative z-10 text-center mb-8">
+                <p className="text-sm font-semibold text-[var(--text)]">{active.name}</p>
+                <p className="text-xs text-[var(--text-secondary)]">{active.role}, {active.company}</p>
+              </div>
+
+              {/* Sliding dot indicators */}
               <div className="relative z-10 pointer-events-auto overflow-hidden w-full max-w-[480px]">
-                {/* Fade edges */}
-                <div className="absolute inset-y-0 left-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(90deg, var(--bg-secondary), transparent)" }} />
-                <div className="absolute inset-y-0 right-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(270deg, var(--bg-secondary), transparent)" }} />
+                <div className="absolute inset-y-0 left-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(90deg, var(--bg-body), transparent)" }} />
+                <div className="absolute inset-y-0 right-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(270deg, var(--bg-body), transparent)" }} />
 
                 <div
                   className="flex items-center gap-8 transition-transform duration-500 ease-out py-2"
                   style={{
-                    /* Shift so activeIndex is always centered:
-                       each item is ~80px wide (gap-8 = 32px + ~48px content),
-                       center = 50% of container minus half an item */
                     transform: `translateX(calc(50% - ${activeIndex * 80 + 40}px))`,
                   }}
                 >
                   {testimonials.map((t, i) => {
                     const isActive = i === activeIndex;
                     const distance = Math.abs(i - activeIndex);
-                    // Fade based on distance: 0 = full, 1 = 0.45, 2 = 0.2, 3+ = 0.1
                     const opacity = isActive ? 1 : Math.max(0.1, 0.55 - distance * 0.2);
                     const scale = isActive ? 1 : Math.max(0.75, 1 - distance * 0.1);
 
@@ -221,19 +177,17 @@ export default function SocialProof() {
                           width: 48,
                         }}
                       >
-                        {/* Name label — bigger when active */}
-                        <span
+                        {/* <span
                           className="font-semibold transition-all duration-500 whitespace-nowrap text-center"
                           style={{
                             fontSize: isActive ? "0.8125rem" : "0.6875rem",
-                            color: isActive ? "rgba(255,255,255,1)" : `rgba(255,255,255,${opacity * 0.6})`,
+                            color: isActive ? "var(--text)" : `rgba(0,0,0,${opacity * 0.4})`,
                           }}
                         >
-                          {t.name}
-                        </span>
+                          {t.name.split(" ")[0]}
+                        </span> */}
 
-                        {/* Horizontal progress bar */}
-                        <div className="w-full h-[2px] rounded-full overflow-hidden" style={{ backgroundColor: isActive ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.06)" }}>
+                        <div className="w-full h-[2px] rounded-full overflow-hidden" style={{ backgroundColor: isActive ? "rgba(0,0,0,0.08)" : "rgba(0,0,0,0.04)" }}>
                           {isActive && (
                             <div
                               key={activeIndex}

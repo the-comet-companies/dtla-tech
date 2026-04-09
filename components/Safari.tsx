@@ -79,7 +79,7 @@ export function Safari({
           <img
             src={imageSrc}
             alt=""
-            className="block size-full object-cover object-top"
+            className="block w-full h-auto"
           />
         </div>
       )}
@@ -142,19 +142,19 @@ export function Safari({
             cx="27"
             cy="25"
             r="6"
-            className="fill-[#404040]"
+            className="fill-[#FF5F57]"
           />
           <circle
             cx="47"
             cy="25"
             r="6"
-            className="fill-[#404040]"
+            className="fill-[#FEBC2E]"
           />
           <circle
             cx="67"
             cy="25"
             r="6"
-            className="fill-[#404040]"
+            className="fill-[#28C840]"
           />
           <path
             d="M286 17C286 13.6863 288.686 11 292 11H946C949.314 11 952 13.6863 952 17V35C952 38.3137 949.314 41 946 41H292C288.686 41 286 38.3137 286 35V17Z"

@@ -1,278 +1,364 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import gsap from "gsap";
-import { demoTabs as demoTabsData, solutionsDemoSection } from "@/lib/constants";
+import { useState } from "react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
+import {
+  solutionsDemoSection,
+  solutionsDemoTabs,
+  websiteDemoFeatures,
+  filemakerDemoFeatures,
+} from "@/lib/constants";
 import { Safari } from "./Safari";
-import SectionHeading from "./SectionHeading";
+import { Iphone } from "./Iphone";
 
-interface DemoTab {
+// ── Types ──
+interface DemoFeature {
   id: string;
-  label: string;
-  icon: React.ReactNode;
-  description: string;
-  mediaSrc?: string;        // image path (PNG/GIF)
-  mediaType?: "image" | "video";
-  safariUrl: string;
+  tabLabel: string;
+  tabIcon: string;
+  title: string;
+  painPoint: { label: string; description: string };
+  solution: { label: string; description: string };
+  imageSrc: string;
+  browserUrl: string;
+  useMobileFrame?: boolean;
 }
 
-const iconMap: Record<string, React.ReactNode> = {
-  "order-management": (
-    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
-    </svg>
-  ),
-  "production-tracking": (
-    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-    </svg>
-  ),
-  "customer-portal": (
-    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-    </svg>
-  ),
-  invoicing: (
-    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-    </svg>
-  ),
-  website: (
-    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5a17.92 17.92 0 01-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-    </svg>
-  ),
-};
-
-const demoTabs: DemoTab[] = demoTabsData.map((tab) => ({
-  ...tab,
-  icon: iconMap[tab.id],
-}));
-
-/* ──────────────────────────────────────────────
-   Placeholder component shown when no real
-   image/GIF has been provided yet
-   ────────────────────────────────────────────── */
-function DemoPlaceholder({ label }: { label: string }) {
+// ── Feature Panel ──
+function FeaturePanel({ feature }: { feature: DemoFeature }) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#151C2C] relative overflow-hidden select-none">
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
+    <motion.div
+      key={feature.id}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.25 }}
+      className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start lg:items-start mb-12 md:mb-20 lg:mb-28"
+    >
+      {/* Left: Copy */}
+      <div className="lg:w-4/12 flex flex-col gap-4 order-2 lg:order-1">
+        <motion.h3
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.06 }}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1D1D1F] leading-tight"
+        >
+          {feature.title}
+        </motion.h3>
 
-      {/* Glowing orb */}
-      <div
-        className="absolute w-[280px] h-[280px] rounded-full opacity-20 blur-[80px]"
-        style={{ background: "var(--brand)" }}
-      />
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.12 }}
+          className="relative p-4 border border-black/10 bg-white/40 backdrop-blur-md shadow-sm rounded-xl overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-24 h-24 bg-white/50 blur-2xl rounded-full pointer-events-none" />
+          <p className="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1.5 relative z-10">
+            {feature.painPoint.label}
+          </p>
+          <p className="text-sm text-gray-600 leading-relaxed font-medium relative z-10">
+            {feature.painPoint.description}
+          </p>
+        </motion.div>
 
-      {/* Icon */}
-      <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/[0.06] border border-[var(--border)] flex items-center justify-center mb-5">
-        <svg className="w-7 h-7 text-[var(--brand)] opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V5.25a1.5 1.5 0 00-1.5-1.5H3.75a1.5 1.5 0 00-1.5 1.5v14.25c0 .828.672 1.5 1.5 1.5z" />
-        </svg>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.18 }}
+          className="relative p-4 border border-black/10 bg-white/40 backdrop-blur-md shadow-sm rounded-xl overflow-hidden"
+        >
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/50 blur-2xl rounded-full pointer-events-none" />
+          <p className="text-xs font-bold uppercase tracking-widest text-[#0066CC] mb-1.5 relative z-10">
+            {feature.solution.label}
+          </p>
+          <p className="text-sm text-[#1D1D1F] leading-relaxed font-semibold relative z-10">
+            {feature.solution.description}
+          </p>
+        </motion.div>
       </div>
 
-      {/* Label */}
-      <span className="relative z-10 text-sm font-medium text-white/30 tracking-wide uppercase">
-        {label}
-      </span>
-      <span className="relative z-10 text-xs text-white/15 mt-1.5">
-        {solutionsDemoSection.placeholderText}
-      </span>
+      {/* Right: Device mockup */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.08 }}
+        className="lg:w-8/12 w-full order-1 lg:order-2"
+      >
+        {feature.useMobileFrame ? (
+          <div className="flex items-center justify-center">
+            <div className="w-[220px] sm:w-[260px] md:w-[280px]">
+              <Iphone src={feature.imageSrc} />
+            </div>
+          </div>
+        ) : (
+          <Safari
+            url={feature.browserUrl}
+            imageSrc={feature.imageSrc}
+            mode="default"
+          />
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ── Sub-tab bar ──
+function SubTabBar({
+  features,
+  activeIndex,
+  onSelect,
+  layoutId,
+}: {
+  features: DemoFeature[];
+  activeIndex: number;
+  onSelect: (i: number) => void;
+  layoutId: string;
+}) {
+  return (
+    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/80 backdrop-blur-md py-4 mb-10 md:mb-14 px-4 md:px-8">
+      <LayoutGroup>
+        <div className="relative">
+          <div className="flex gap-1.5 overflow-x-auto pb-1 justify-center scrollbar-hide">
+            {features.map((f, i) => (
+              <button
+                key={f.id}
+                onClick={() => onSelect(i)}
+                className={`relative flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-medium whitespace-nowrap flex-shrink-0 transition-colors cursor-pointer ${
+                  activeIndex === i
+                    ? "text-white"
+                    : "border border-gray-200 text-gray-500 hover:text-[#1D1D1F] hover:border-[#0066CC]/30"
+                }`}
+              >
+                {activeIndex === i && (
+                  <motion.div
+                    layoutId={layoutId}
+                    className="absolute inset-0 bg-[#0066CC] rounded-full"
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                    }}
+                  />
+                )}
+                <span className="material-symbols-outlined text-sm sm:text-base relative z-10 hidden sm:inline-block">
+                  {f.tabIcon}
+                </span>
+                <span className="relative z-10">{f.tabLabel}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </LayoutGroup>
     </div>
   );
 }
 
-export default function SolutionsDemo() {
-  const [activeTab, setActiveTab] = useState(demoTabs[0].id);
-  const safariRef = useRef<HTMLDivElement>(null);
-  const descRef = useRef<HTMLParagraphElement>(null);
-  const isAnimating = useRef(false);
+// ── Feature Section (Website or FileMaker) ──
+function FeatureSection({
+  badge,
+  badgeColor,
+  title,
+  subtitle,
+  features,
+  layoutId,
+}: {
+  badge: string;
+  badgeColor: string;
+  title: string;
+  subtitle: string;
+  features: DemoFeature[];
+  layoutId: string;
+}) {
+  const [activeTab, setActiveTab] = useState(0);
+  const activeFeature = features[activeTab];
 
-  const activeDemo = demoTabs.find((t) => t.id === activeTab)!;
+  return (
+    <div className="pt-12 md:pt-16 lg:pt-20 pb-0 relative">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
+        {/* Section header */}
+        <div className="text-center mb-12 md:mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className={`inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 ${badgeColor}`}
+          >
+            {badge}
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4"
+          >
+            {title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="text-lg md:text-xl text-[#6E6E73] max-w-2xl mx-auto leading-relaxed"
+          >
+            {subtitle}
+          </motion.p>
+        </div>
+      </div>
 
-  const switchTab = useCallback(
-    (tabId: string) => {
-      if (tabId === activeTab || isAnimating.current) return;
-      isAnimating.current = true;
+      {/* Sub-tabs */}
+      <SubTabBar
+        features={features}
+        activeIndex={activeTab}
+        onSelect={setActiveTab}
+        layoutId={layoutId}
+      />
 
-      const tl = gsap.timeline({
-        onComplete: () => {
-          isAnimating.current = false;
-        },
-      });
-
-      // Fade out Safari + description
-      tl.to([safariRef.current, descRef.current], {
-        opacity: 0,
-        y: 12,
-        duration: 0.25,
-        ease: "power2.in",
-        stagger: 0.04,
-        onComplete: () => setActiveTab(tabId),
-      });
-    },
-    [activeTab],
+      {/* Feature panel */}
+      <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
+        <AnimatePresence mode="wait">
+          <FeaturePanel key={activeFeature.id} feature={activeFeature} />
+        </AnimatePresence>
+      </div>
+    </div>
   );
+}
 
-  // Animate in after tab change
-  useEffect(() => {
-    if (!safariRef.current) return;
-
-    gsap.fromTo(
-      [safariRef.current, descRef.current],
-      { opacity: 0, y: 16 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power3.out",
-        stagger: 0.06,
-        onComplete: () => {
-          isAnimating.current = false;
-        },
-      },
-    );
-  }, [activeTab]);
+// ── Main SolutionsDemo ──
+export default function SolutionsDemo() {
+  const [activeTab, setActiveTab] = useState("website");
 
   return (
     <section
       id="demos"
-      className="w-full bg-[var(--bg-body)]"
-      data-scroll-section
+      className="w-full bg-[var(--bg-secondary)] relative"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(0,102,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,204,0.03) 1px, transparent 1px)",
+        backgroundSize: "140px 140px",
+      }}
     >
-      <div
-        className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] py-[var(--section-padding-y)]"
-        data-scroll-content
-      >
-        {/* ── Heading ── */}
-        <div data-animate="fade-up">
-          <SectionHeading
-            label={solutionsDemoSection.label}
-            title={solutionsDemoSection.title}
-            subtitle={solutionsDemoSection.subtitle}
-          />
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+        {/* Section heading */}
+        <div className="text-center pt-16 md:pt-20 mb-10 md:mb-14">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4"
+          >
+            {solutionsDemoSection.title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-lg md:text-xl text-[#6E6E73] max-w-2xl mx-auto leading-relaxed"
+          >
+            {solutionsDemoSection.subtitle}
+          </motion.p>
         </div>
 
-        {/* ── Mobile tab strip (horizontal scroll) ── */}
-        <div className="flex md:hidden gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide" data-animate="fade-up">
-          {demoTabs.map((tab) => {
-            const isActive = tab.id === activeTab;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => switchTab(tab.id)}
-                className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-[0.8125rem] font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap border"
-                style={{
-                  backgroundColor: isActive ? "var(--brand)" : "transparent",
-                  borderColor: isActive ? "var(--brand)" : "rgba(255,255,255,0.08)",
-                  color: isActive ? "white" : "rgba(255,255,255,0.45)",
-                }}
-              >
-                {tab.icon}
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ── Desktop: sidebar tabs + Safari ── */}
-        <div className="flex gap-6 items-start" data-animate="fade-up">
-          {/* Vertical tab list — desktop only */}
-          <div className="hidden md:flex flex-col shrink-0 w-[220px]">
-            {demoTabs.map((tab, i) => {
-              const isActive = tab.id === activeTab;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => switchTab(tab.id)}
-                  className="group relative flex items-center gap-3 px-4 py-4 text-left cursor-pointer transition-all duration-300"
-                >
-                  {/* Left accent bar */}
-                  <div
-                    className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full transition-all duration-400"
-                    style={{
-                      backgroundColor: isActive ? "var(--brand)" : "rgba(255,255,255,0.06)",
-                      boxShadow: isActive ? "0 0 12px rgba(240,92,78,0.3)" : "none",
-                    }}
-                  />
-
-                  {/* Icon */}
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300"
-                    style={{
-                      backgroundColor: isActive ? "var(--brand-10)" : "rgba(255,255,255,0.03)",
-                      color: isActive ? "var(--brand)" : "rgba(255,255,255,0.3)",
-                    }}
-                  >
-                    {tab.icon}
-                  </div>
-
-                  {/* Label + description */}
-                  <div className="min-w-0">
-                    <span
-                      className="block text-[0.8125rem] font-semibold leading-tight transition-colors duration-300 truncate"
-                      style={{
-                        color: isActive ? "var(--text)" : "rgba(255,255,255,0.4)",
-                      }}
-                    >
-                      {tab.label}
-                    </span>
-                    {isActive && (
-                      <span className="block text-[0.6875rem] leading-snug text-[var(--text-secondary)] mt-0.5 line-clamp-2">
-                        {tab.description}
-                      </span>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Safari mockup */}
-          <div className="flex-1 min-w-0">
-            {/* Mobile description */}
-            <p
-              ref={descRef}
-              className="md:hidden text-[0.875rem] leading-relaxed text-[var(--text-secondary)] mb-5"
+        {/* Primary tabs */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-2">
+          {solutionsDemoTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`relative flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+                activeTab === tab.id
+                  ? "bg-[#0066CC] text-white"
+                  : "border border-gray-200 text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#0066CC]/30"
+              }`}
             >
-              {activeDemo.description}
-            </p>
-
-            <div ref={safariRef} className="relative">
-              <Safari
-                key={activeTab}
-                url={activeDemo.safariUrl}
-                imageSrc={activeDemo.mediaSrc}
-                mode="default"
-              />
-
-              {/* Placeholder overlay */}
-              {!activeDemo.mediaSrc && (
-                <div
-                  className="absolute overflow-hidden pointer-events-none"
-                  style={{
-                    left: `${(1 / 1203) * 100}%`,
-                    top: `${(52 / 753) * 100}%`,
-                    width: `${(1200 / 1203) * 100}%`,
-                    height: `${(700 / 753) * 100}%`,
-                    borderRadius: "0 0 11px 11px",
-                  }}
-                >
-                  <DemoPlaceholder label={activeDemo.label} />
-                </div>
-              )}
-            </div>
-          </div>
+              <span className="material-symbols-outlined text-base">
+                {tab.icon}
+              </span>
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
+
+      {/* Tab content */}
+      <AnimatePresence mode="wait">
+        {(activeTab === "website" || activeTab === "both") && (
+          <motion.div
+            key="website"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FeatureSection
+              badge="Your Storefront"
+              badgeColor="bg-teal-500/10 text-teal-600"
+              title="A Website That Works as Hard as You Do"
+              subtitle="More than a website — a complete online storefront with custom ordering, product configuration, and seamless checkout built for print shops."
+              features={websiteDemoFeatures}
+              layoutId="activeWebsiteTab"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {(activeTab === "filemaker" || activeTab === "both") && (
+          <motion.div
+            key="filemaker"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FeatureSection
+              badge="FileMaker System"
+              badgeColor="bg-[#0066CC]/10 text-[#0066CC]"
+              title="Your Back Office, Fully Automated"
+              subtitle="A powerful FileMaker-based system that runs your entire operation — from quoting and orders to scheduling and analytics."
+              features={filemakerDemoFeatures}
+              layoutId="activeFilemakerTab"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Combined CTA for "both" */}
+      <AnimatePresence mode="wait">
+        {activeTab === "both" && (
+          <motion.div
+            key="combined-cta"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center justify-center pt-8 pb-12"
+          >
+            <a
+              href="#interest-form"
+              className="px-8 py-3 min-h-[44px] text-base font-semibold text-[#1D1D1F] relative overflow-hidden group rounded-full inline-flex items-center gap-2 justify-center flex-shrink-0"
+            >
+              <div className="absolute inset-0 bg-white/20 group-hover:bg-white/30 transition-colors rounded-full" />
+              <div className="absolute inset-0 border-2 border-[#1D1D1F]/20 group-hover:border-[#1D1D1F]/30 transition-colors rounded-full" />
+              <span className="relative z-10">
+                Learn more about the Complete System
+              </span>
+              <span
+                className="material-symbols-outlined text-lg relative z-10 group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              >
+                arrow_forward
+              </span>
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Bottom padding for non-both tabs */}
+      {activeTab !== "both" && <div className="pb-16 md:pb-20" />}
     </section>
   );
 }

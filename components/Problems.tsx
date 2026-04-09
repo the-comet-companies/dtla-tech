@@ -20,7 +20,7 @@ export default function Problems() {
   return (
     <section
       id="problem"
-      className="relative w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] overflow-hidden"
+      className="relative w-full py-[var(--section-padding-y)] bg-[var(--bg-body)] overflow-hidden"
       data-scroll-section
     >
       {/* Watermark text */}
@@ -35,7 +35,7 @@ export default function Problems() {
         <div data-scroll-heading>
           <div className="mb-12 text-left">
             {/* Label badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-[var(--border)] text-sm font-medium text-[var(--text)] mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-[var(--structural-border)] text-sm font-medium text-[var(--text)] mb-6">
               <span className="w-2 h-2 rounded-full bg-[var(--brand)]" />
               <span>{problemsSection.label}</span>
             </div>
@@ -85,7 +85,7 @@ export default function Problems() {
                     className="absolute inset-0 pointer-events-none"
                     style={{
                       background:
-                        "linear-gradient(105deg, transparent 40%, rgba(240,92,78,0.04) 45%, rgba(240,92,78,0.08) 50%, rgba(240,92,78,0.04) 55%, transparent 60%)",
+                        "linear-gradient(105deg, transparent 40%, rgba(0,102,204,0.04) 45%, rgba(0,102,204,0.08) 50%, rgba(0,102,204,0.04) 55%, transparent 60%)",
                       backgroundSize: "200% 100%",
                       animation: "problemShimmer 2s ease-in-out forwards",
                     }}

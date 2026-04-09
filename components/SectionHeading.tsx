@@ -15,7 +15,7 @@ export default function SectionHeading({
       data-animate="fade-up"
     >
       {label && (
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-[var(--border)] text-sm font-medium text-[var(--text)] mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-[var(--border)] text-sm font-medium text-[var(--text)] mb-6">
           <span className="w-2 h-2 rounded-full bg-[var(--brand)]" />
           <span>{label}</span>
         </div>

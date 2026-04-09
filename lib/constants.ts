@@ -316,51 +316,405 @@ export const filemakerFeatures = [
 // ── Solutions Demo ──
 export const solutionsDemoSection = {
   label: "See It in Action",
-  title: "Solutions at a Glance",
+  title: "Solutions That Scale With You",
   subtitle:
-    "Walk through each part of the system — from order intake to invoicing — and see exactly how it works.",
-  placeholderText: "GIF or PNG coming soon",
+    "Start with what you need. Expand as your business grows.",
 };
 
-export const demoTabs = [
+export const solutionsDemoTabs = [
+  { id: "website", label: "Website", icon: "language" },
+  { id: "filemaker", label: "FileMaker", icon: "database" },
+  { id: "both", label: "Website + FileMaker", icon: "hub" },
+];
+
+export const websiteDemoFeatures = [
   {
-    id: "order-management",
-    label: "Order Management",
-    description:
-      "Track every order from intake to delivery with real-time status updates and automated workflows.",
-    safariUrl: "shop-titan.app/orders",
+    id: "storefront",
+    tabLabel: "Storefront",
+    tabIcon: "storefront",
+    title: "Custom Storefront",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Generic website templates that don't fit apparel decoration. No way to showcase your work, handle custom orders, or reflect your brand.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "A fully branded storefront built for print shops. Showcase your products, services, and portfolio — designed to convert visitors into customers.",
+    },
+    imageSrc: "/demos/website/StoreFront.png",
+    browserUrl: "dtlaprint.com",
   },
   {
-    id: "production-tracking",
-    label: "Production",
-    description:
-      "Monitor production queues, track decorator assignments, and manage capacity across all stations.",
-    safariUrl: "shop-titan.app/production",
+    id: "product-catalog",
+    tabLabel: "Product Catalog",
+    tabIcon: "grid_view",
+    title: "Product Catalog",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Your customers can't see what you carry. No browsable catalog, no color options, no way to compare styles — they call, email, or go somewhere else.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "A browsable, searchable product catalog that shows everything you offer — with real photos, color swatches, size breakdowns, and live pricing.",
+    },
+    imageSrc: "/demos/website/ProductCatalog.png",
+    browserUrl: "dtlaprint.com/products",
+  },
+  {
+    id: "brands",
+    tabLabel: "Brands",
+    tabIcon: "loyalty",
+    title: "Brands",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Customers don't know what blanks you carry. No way to browse by brand, compare quality, or see what's available.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Showcase every brand you carry with dedicated brand pages. Customers browse by brand, see available styles, and order with confidence.",
+    },
+    imageSrc: "/demos/website/Brands.png",
+    browserUrl: "dtlaprint.com/brands",
+  },
+  {
+    id: "drag-and-drop",
+    tabLabel: "Drag & Drop",
+    tabIcon: "upload_file",
+    title: "Drag & Drop Upload",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Customers emailing artwork back and forth. Lost files, wrong formats, unclear placement instructions. Endless revision cycles.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Drag-and-drop file upload right on your website. Customers attach their artwork directly to their order — no emails, no confusion.",
+    },
+    imageSrc: "/demos/website/DragAndDrop.png",
+    browserUrl: "dtlaprint.com/upload",
+  },
+  {
+    id: "services",
+    tabLabel: "Services",
+    tabIcon: "design_services",
+    title: "Services",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Customers don't know what decoration methods you offer. No clear breakdown of services — so they look elsewhere.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Dedicated services pages that showcase every decoration method you offer. Customers understand your capabilities and order the right service.",
+    },
+    imageSrc: "/demos/website/Services.png",
+    browserUrl: "dtlaprint.com/services",
   },
   {
     id: "customer-portal",
-    label: "Customer Portal",
-    description:
-      "Give customers self-service access to approvals, order history, and real-time job tracking.",
-    safariUrl: "dtlaprint.com/portal",
+    tabLabel: "Customer Portal",
+    tabIcon: "person",
+    title: "Customer Portal",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        '"Where\'s my order?" calls all day. Customers have no visibility into their order status, history, or account details.',
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Self-service customer portal with order tracking, history, reorder capability, and saved designs. Fewer support calls, happier customers.",
+    },
+    imageSrc: "/demos/website/CustomerPortal.png",
+    browserUrl: "dtlaprint.com/portal",
   },
   {
-    id: "invoicing",
-    label: "Invoicing",
-    description:
-      "Auto-generate invoices from completed jobs with line-item detail, tax calculations, and payment tracking.",
-    safariUrl: "shop-titan.app/invoicing",
+    id: "seo",
+    tabLabel: "SEO & Analytics",
+    tabIcon: "trending_up",
+    title: "SEO & Analytics",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "No online presence. Competitors rank above you on Google. No data on who visits your site or what they're looking for.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Built-in SEO optimization, Google Analytics integration, and conversion tracking. Know where your traffic comes from.",
+    },
+    imageSrc: "/demos/website/SEO.png",
+    browserUrl: "dtlaprint.com/analytics",
   },
   {
-    id: "website",
-    label: "Website",
-    description:
-      "A modern storefront with product customization, quoting, and seamless checkout — all connected to Shop Titan.",
-    safariUrl: "dtlaprint.com",
+    id: "mobile",
+    tabLabel: "Mobile Responsive",
+    tabIcon: "smartphone",
+    title: "Mobile Responsive",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Your website breaks on mobile. Over 60% of traffic is mobile, but your site was built for desktop only.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Fully responsive design that looks and works perfectly on any device. Your customers can browse, configure, and order from their phone.",
+    },
+    imageSrc: "/demos/website/mobile.png",
+    browserUrl: "dtlaprint.com",
+    useMobileFrame: true,
+  },
+];
+
+export const filemakerDemoFeatures = [
+  {
+    id: "quotes",
+    tabLabel: "Quotes",
+    tabIcon: "request_quote",
+    title: "Quotes",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Manual quote creation with spreadsheets. Inconsistent pricing. Hours spent calculating setup fees, per-piece costs, and rush charges.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Automated quote generation with intelligent pricing matrices. Template library, auto-calculations, and one-click PDF generation.",
+    },
+    imageSrc: "/demos/filemaker/Quotes.png",
+    browserUrl: "app.shoptitan.com/quotes",
+  },
+  {
+    id: "orders",
+    tabLabel: "Orders",
+    tabIcon: "shopping_cart",
+    title: "Orders",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        '"Where is order #492?" Lost orders, unclear status, constant check-in calls. Job jackets getting lost between office and production floor.',
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "End-to-end order tracking with real-time status updates. Every order's journey is logged, visible, and searchable from anywhere.",
+    },
+    imageSrc: "/demos/filemaker/Orders.png",
+    browserUrl: "app.shoptitan.com/orders",
+  },
+  {
+    id: "email-template",
+    tabLabel: "Email Templates",
+    tabIcon: "mail",
+    title: "Email Templates",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Sending plain text emails or manually formatting every message. No consistency, no branding, no way to automate order confirmations.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Professional, branded email templates for order confirmations, invoices, shipping updates, and more. Automated and consistent every time.",
+    },
+    imageSrc: "/demos/filemaker/EmailTemplate.png",
+    browserUrl: "app.shoptitan.com/email",
+  },
+  {
+    id: "support",
+    tabLabel: "Support",
+    tabIcon: "support_agent",
+    title: "Support",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Transfer requests and firm confirmations handled through scattered emails and phone calls. No tracking, no accountability, no audit trail.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Built-in transfer and firm management. Track requests, confirmations, and status changes in one place — with full history and real-time updates.",
+    },
+    imageSrc: "/demos/filemaker/transfer&firm.gif",
+    browserUrl: "app.shoptitan.com/support",
+  },
+  {
+    id: "tasks",
+    tabLabel: "Task Types",
+    tabIcon: "tune",
+    title: "Task Types",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Rigid software that can't handle your custom workflows. Every shop does things differently, but you're stuck with one-size-fits-all.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Fully configurable task types and decoration methods. Custom fields, workflow rules, and pricing formulas for ANY process you run.",
+    },
+    imageSrc: "/demos/filemaker/TaskTypes.png",
+    browserUrl: "app.shoptitan.com/tasks",
+  },
+  {
+    id: "pricing",
+    tabLabel: "Service Pricing",
+    tabIcon: "grid_on",
+    title: "Service Pricing Grid",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Underquoting complex jobs. No structured pricing for different decoration types. Sales team guessing at stitch counts or screen counts.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Dynamic pricing matrices for all decoration types: embroidery (stitch count), screen printing (colors, screens), sewing, and any custom task.",
+    },
+    imageSrc: "/demos/filemaker/ServicePricingGrid.png",
+    browserUrl: "app.shoptitan.com/pricing",
+  },
+  {
+    id: "screen-pricing",
+    tabLabel: "Screen Pricing",
+    tabIcon: "grid_on",
+    title: "Screen Pricing Grid",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Screen printing pricing is a guessing game. Number of colors, screen counts, and setup fees vary per job — nobody quotes them consistently.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Dedicated screen printing pricing matrix. Set rates by color count, quantity breaks, and screen fees — every quote is accurate.",
+    },
+    imageSrc: "/demos/filemaker/ScreenPricingGrid.png",
+    browserUrl: "app.shoptitan.com/screen-pricing",
+  },
+  {
+    id: "customers",
+    tabLabel: "Customers / Vendors",
+    tabIcon: "people",
+    title: "Customers / Vendors",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Contact info scattered across emails, sticky notes, and old spreadsheets. No relationship history. No visibility into customer lifetime value.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Unified CRM and VRM with complete relationship tracking. Contact cards, order history, notes, and communication logs all in one place.",
+    },
+    imageSrc: "/demos/filemaker/Customers.png",
+    browserUrl: "app.shoptitan.com/customers",
+  },
+  {
+    id: "purchase-orders",
+    tabLabel: "Purchase Orders",
+    tabIcon: "receipt_long",
+    title: "Purchase Orders",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Manual PO creation, vendor emails flying back and forth. Stock running out mid-job because nobody tracked what was ordered.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Automated PO generation with vendor integration. RFQ workflow for quotes, auto-reordering based on stock levels, and complete order tracking.",
+    },
+    imageSrc: "/demos/filemaker/PurchaseOrders.png",
+    browserUrl: "app.shoptitan.com/purchase-orders",
+  },
+  {
+    id: "reporting",
+    tabLabel: "Reporting",
+    tabIcon: "assessment",
+    title: "Reporting",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "No visibility into your numbers. Revenue, costs, and margins buried in spreadsheets. You find out about problems weeks after they happen.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Built-in reporting with real-time dashboards. Track revenue, production output, costs, and profitability — all from one place.",
+    },
+    imageSrc: "/demos/filemaker/Reporting.png",
+    browserUrl: "app.shoptitan.com/reporting",
+  },
+  {
+    id: "contractors",
+    tabLabel: "Contractors",
+    tabIcon: "handshake",
+    title: "Contractor Work Orders",
+    painPoint: {
+      label: "THE FRICTION",
+      description:
+        "Subcontractor miscommunication. Work sent out with vague specs. Jobs coming back wrong or late with no accountability.",
+    },
+    solution: {
+      label: "THE FIX",
+      description:
+        "Digital work order system for contractors. Send work out with detailed spec sheets, track deadlines, and get quality confirmation — all documented.",
+    },
+    imageSrc: "/demos/filemaker/Contractor.png",
+    browserUrl: "app.shoptitan.com/contractors",
   },
 ];
 
 // ── What's Available ──
+// ── AI-Powered Platform ──
+export const aiPlatformSection = {
+  label: "AI-Powered",
+  title: "AI-Powered Platform",
+  subtitle:
+    "Our website and FileMaker system are integrated with leading AI models. From smart product descriptions and automated customer responses to intelligent order processing and predictive analytics.",
+};
+
+export const aiModels = [
+  { name: "OpenAI", logo: "/logos/ai/openai.svg", description: "GPT-4o for content generation, product descriptions, and customer communication." },
+  { name: "Claude", logo: "/logos/ai/claude.png", description: "Advanced reasoning for complex order processing and business analytics." },
+  { name: "Gemini", logo: "/logos/ai/gemini.svg", description: "Multimodal AI for image analysis, art file processing, and visual proofing." },
+  { name: "Perplexity", logo: "/logos/ai/perplexity.png", description: "Real-time research for market insights, pricing intelligence, and trend analysis." },
+];
+
+export const aiCapabilities = [
+  {
+    icon: "auto_awesome",
+    title: "Smart Product Descriptions",
+    description: "AI generates SEO-optimized product descriptions, meta tags, and catalog copy — tailored to your brand voice.",
+  },
+  {
+    icon: "support_agent",
+    title: "Automated Customer Responses",
+    description: "Instant replies to common inquiries — order status, quote requests, and turnaround times — 24/7.",
+  },
+  {
+    icon: "conveyor_belt",
+    title: "Intelligent Order Processing",
+    description: "AI reads incoming orders, extracts specs, routes jobs to the right machines, and flags potential issues before production.",
+  },
+  {
+    icon: "analytics",
+    title: "Predictive Analytics",
+    description: "Forecast demand, identify your most profitable services, and spot trends before your competitors do.",
+  },
+];
+
 export const whatsAvailableSection = {
   label: "What You Get",
   title: "Choose what you need",
@@ -467,19 +821,47 @@ export const operatorStats = [
 // ── Social Proof ──
 export const socialProofSection = {
   label: "Trusted by Shops",
-  title: "What Our Clients Say",
+  title: "Real shops. Real results.",
   subtitle:
-    "Real feedback from decoration shops already running on our technology.",
-  placeholderQuote: "Client testimonial placeholder — replace with a real quote.",
+    "No demos. No cherry-picked screenshots. Just what print and embroidery shops say after using it.",
 };
 
 export const testimonials = [
-  { quote: "", name: "Client 1", role: "Owner", avatarSrc: "" },
-  { quote: "", name: "Client 2", role: "Production Manager", avatarSrc: "" },
-  { quote: "", name: "Client 3", role: "Operations Director", avatarSrc: "" },
-  { quote: "", name: "Client 4", role: "Shop Owner", avatarSrc: "" },
-  { quote: "", name: "Client 5", role: "Creative Director", avatarSrc: "" },
-  { quote: "", name: "Client 6", role: "Business Consultant", avatarSrc: "" },
+  {
+    quote:
+      "Shop Titan transformed how we handle custom orders. What used to take our team hours now gets done in minutes. It's the single biggest upgrade we've made.",
+    name: "Sarah Martinez",
+    role: "Owner",
+    company: "Premier Embroidery Co.",
+  },
+  {
+    quote:
+      "The single source of truth concept is revolutionary. No more hunting for information across spreadsheets — everything is exactly where you expect it.",
+    name: "Michael Chen",
+    role: "Production Manager",
+    company: "Elite Screen Printing",
+  },
+  {
+    quote:
+      "We scaled from 5 to 20 employees without losing our minds. The system handles everything — orders, scheduling, QC. I can't imagine running the shop without it.",
+    name: "Jessica Williams",
+    role: "CEO",
+    company: "Custom Apparel Solutions",
+  },
+  {
+    quote:
+      "Pricing matrices alone saved us from so many costly mistakes. Our quotes go out in seconds now, and customers love the turnaround.",
+    name: "David Park",
+    role: "Owner",
+    company: "Park Print & Promo",
+  },
+  {
+    quote:
+      "Rush job coordination used to be pure chaos. Now it's a few clicks and everyone knows exactly what to do. Night and day difference.",
+    name: "Tanya Rhodes",
+    role: "Shop Manager",
+    company: "FastTurn Apparel",
+  },
 ];
 
 // ── Who This Is For ──

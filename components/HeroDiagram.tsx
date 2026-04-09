@@ -193,7 +193,7 @@ export default function HeroDiagram() {
           url="dtlaprint.com/dashboard"
           mode="default"
           className="w-full [&_svg]:dark:opacity-100 pointer-events-none"
-          style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.4))" }}
+          style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.15))" }}
         />
 
         {/* Dashboard content — z-20 to sit above Safari SVG (z-10) */}

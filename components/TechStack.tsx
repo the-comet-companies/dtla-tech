@@ -31,30 +31,22 @@ function BentoCard({ title, description, logos, className }: BentoCardData) {
   if (isFullWidth) {
     return (
       <div
-        className={`group relative overflow-hidden rounded-[16px] border border-white/[0.06] bg-[var(--bg-card)] transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)] ${className}`}
+        className={`group relative overflow-hidden rounded-[16px] border border-[var(--structural-border)] bg-[var(--bg-card)] transition-all duration-500 hover:border-black/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] ${className}`}
       >
         <div className="flex flex-col sm:flex-row items-center gap-6 p-8">
-          {/* Logos on the right, faded */}
           <div className="flex items-center gap-4 shrink-0 order-2 sm:order-1 sm:mr-auto">
             {logos.map((logo) => (
               <div
                 key={logo.alt}
-                className="flex items-center justify-center px-5 py-3 rounded-lg bg-white/90"
+                className="flex items-center justify-center px-5 py-3 rounded-lg bg-black/[0.03]"
               >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-10 w-auto object-contain"
-                />
+                <img src={logo.src} alt={logo.alt} className="h-10 w-auto object-contain" />
               </div>
             ))}
           </div>
-          {/* Text */}
           <div className="text-center sm:text-right order-1 sm:order-2">
-            <h3 className="text-lg font-bold text-white mb-1.5">{title}</h3>
-            <p className="text-sm leading-relaxed text-white/50 max-w-md">
-              {description}
-            </p>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1.5">{title}</h3>
+            <p className="text-sm leading-relaxed text-[var(--text-secondary)] max-w-md">{description}</p>
           </div>
         </div>
       </div>
@@ -63,28 +55,19 @@ function BentoCard({ title, description, logos, className }: BentoCardData) {
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-[16px] border border-white/[0.06] bg-[var(--bg-card)] transition-all duration-500 hover:border-white/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)] ${className}`}
+      className={`group relative overflow-hidden rounded-[16px] border border-[var(--structural-border)] bg-[var(--bg-card)] transition-all duration-500 hover:border-black/[0.12] hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] ${className}`}
     >
-      {/* Logo background — fades out toward bottom */}
       <div className="absolute inset-0 flex flex-wrap items-start justify-center gap-3 p-6 pt-8 content-start [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6)_0%,rgba(0,0,0,0.15)_55%,transparent_80%)] transition-all duration-500 group-hover:scale-105">
         {logos.map((logo) => (
-          <div
-            key={logo.alt}
-            className="flex items-center justify-center px-4 py-2.5 rounded-lg bg-white/90 shrink-0"
-          >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              className="h-8 w-auto object-contain"
-            />
+          <div key={logo.alt} className="flex items-center justify-center px-4 py-2.5 rounded-lg bg-black/[0.03] shrink-0">
+            <img src={logo.src} alt={logo.alt} className="h-8 w-auto object-contain" />
           </div>
         ))}
       </div>
 
-      {/* Card content — anchored to bottom */}
       <div className="relative z-10 flex h-full min-h-[260px] flex-col justify-end p-6">
-        <h3 className="text-lg font-bold text-white mb-1.5">{title}</h3>
-        <p className="text-sm leading-relaxed text-white/50">{description}</p>
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1.5">{title}</h3>
+        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{description}</p>
       </div>
     </div>
   );
@@ -99,7 +82,6 @@ export default function TechStack() {
 
     const bentoCards = section.querySelectorAll("[data-bento-card]");
     if (bentoCards.length === 0) {
-      // fallback: animate the grid wrapper children
       const grid = section.querySelector("[data-bento-grid]");
       if (!grid) return;
       const children = grid.children;
@@ -126,7 +108,7 @@ export default function TechStack() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] border-y border-white/[0.04]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-body)] border-y border-[var(--structural-border)]"
     >
       <div className="w-full px-[var(--container-padding-x)]">
         <div className="text-center mb-14 max-w-[80rem] mx-auto">
@@ -137,11 +119,7 @@ export default function TechStack() {
           />
         </div>
 
-        {/* Bento Grid — 3 columns */}
-        <div
-          data-bento-grid
-          className="grid grid-cols-1 lg:grid-cols-3 gap-4"
-        >
+        <div data-bento-grid className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {cards.map((card) => (
             <BentoCard key={card.title} {...card} />
           ))}

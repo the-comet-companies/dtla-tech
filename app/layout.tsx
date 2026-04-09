@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins, Rubik } from "next/font/google";
+import { Inter, Crimson_Pro } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
-const rubik = Rubik({
-  variable: "--font-rubik",
+const crimsonPro = Crimson_Pro({
+  variable: "--font-crimson",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -35,8 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${rubik.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-[#FFFFFF] text-[#181F30]">{children}</body>
+    <html lang="en" className={`${inter.variable} ${crimsonPro.variable} h-full`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#FBFBFB] text-[#1D1D1F]">{children}</body>
     </html>
   );
 }

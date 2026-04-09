@@ -133,7 +133,7 @@ export default function InterestForm() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
                       step === 2
                         ? "bg-[var(--brand)] text-white"
-                        : "bg-white/[0.06] text-[var(--text-muted)]"
+                        : "bg-black/[0.04] text-[var(--text-muted)]"
                     }`}
                   >
                     2

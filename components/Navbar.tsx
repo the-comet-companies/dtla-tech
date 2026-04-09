@@ -62,15 +62,15 @@ export default function Navbar() {
         <div
           className={`flex items-center gap-1 px-2 py-2 rounded-full border transition-all duration-300 ${
             scrolled
-              ? "bg-[#0F1420]/90 backdrop-blur-xl border-[var(--border)] shadow-[var(--shadow)]"
-              : "bg-[#0F1420]/50 backdrop-blur-md border-white/[0.06]"
+              ? "bg-white/95 backdrop-blur-xl border-[var(--structural-border)] shadow-sm"
+              : "bg-white/60 backdrop-blur-md border-gray-200/60"
           }`}
         >
           <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)]">
             {navBrand.desktop}
           </a>
 
-          <div className="w-px h-4 bg-[var(--border)] mx-1" />
+          <div className="w-px h-4 bg-[var(--structural-border)] mx-1" />
 
           {navLinks.map((link) => (
             <a
@@ -78,8 +78,8 @@ export default function Navbar() {
               href={link.href}
               className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 ${
                 active === link.href.slice(1)
-                  ? "bg-white/[0.12] text-white"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-white/[0.06]"
+                  ? "bg-black/[0.06] text-[var(--text)]"
+                  : "text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-black/[0.04]"
               }`}
             >
               {link.label}
@@ -92,7 +92,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300 ${
           scrolled || menuOpen
-            ? "bg-[#0F1420]/90 backdrop-blur-xl border-b border-[var(--border)] shadow-[var(--shadow)]"
+            ? "bg-white/95 backdrop-blur-xl border-b border-[var(--structural-border)] shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -146,7 +146,7 @@ export default function Navbar() {
         }`}
       >
         <div
-          className="absolute inset-0 bg-[#0A0E1A]/95 backdrop-blur-lg"
+          className="absolute inset-0 bg-white/95 backdrop-blur-lg"
           onClick={handleLinkClick}
         />
 
