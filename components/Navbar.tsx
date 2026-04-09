@@ -66,7 +66,7 @@ export default function Navbar() {
               : "bg-white/60 backdrop-blur-md border-gray-200/60"
           }`}
         >
-          <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)]">
+          <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)] uppercase">
             {navBrand.desktop}
           </a>
 
