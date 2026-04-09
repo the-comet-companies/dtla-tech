@@ -104,6 +104,11 @@ body {
   pointer-events: none;
 }
 
+/* Shift coral/red SVG illustrations to blue — preserves tonal detail */
+.icon-to-blue {
+  filter: hue-rotate(200deg) saturate(1.4);
+}
+
 [data-animate] {
   will-change: transform, opacity;
 }

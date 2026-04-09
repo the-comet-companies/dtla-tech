@@ -18,14 +18,14 @@ export default function ScrollAnimations() {
     const heroDiagram = document.querySelector("[data-hero='diagram']");
 
     if (heroTag && heroHeading && heroSub && heroCtas) {
-      const heroTl = gsap.timeline({ delay: 0.3 });
+      const heroTl = gsap.timeline({ delay: 0.15 });
       heroTl
-        .fromTo(heroTag, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" })
-        .fromTo(heroHeading, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5")
-        .fromTo(heroSub, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.5")
-        .fromTo(heroCtas, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.4")
-        .fromTo(heroDiagram || document.createElement("div"), { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8")
-        .fromTo(heroScroll || document.createElement("div"), { opacity: 0 }, { opacity: 0.4, duration: 1 }, "-=0.2");
+        .fromTo(heroTag, { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" })
+        .fromTo(heroHeading, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, "-=0.35")
+        .fromTo(heroSub, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, "-=0.45")
+        .fromTo(heroCtas, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.35")
+        .fromTo(heroDiagram || document.createElement("div"), { x: 60, opacity: 0, scale: 0.97 }, { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: "expo.out" }, "-=0.7")
+        .fromTo(heroScroll || document.createElement("div"), { opacity: 0 }, { opacity: 0.4, duration: 0.8 }, "-=0.3");
     }
 
     // ===== SECTION ANIMATIONS =====

@@ -12,7 +12,7 @@ export const navLinks = [
 ];
 
 export const navBrand = {
-  desktop: "DTLA",
+  desktop: "DTLA Print",
   mobile: "DTLA Print",
   ctaText: "Request Early Access",
   ctaHref: "#interest-form",

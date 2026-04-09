@@ -19,7 +19,7 @@ import ScrollAnimations from "@/components/ScrollAnimations";
 export default function Home() {
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <Navbar />
       <main>
         <Hero />

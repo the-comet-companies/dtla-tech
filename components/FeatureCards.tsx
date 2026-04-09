@@ -26,7 +26,7 @@ export default function FeatureCards() {
             className="md:col-span-2 bg-[var(--bg-card)] rounded-[16px] border border-[var(--border)] p-7 flex items-center gap-6 transition-all duration-300 hover:shadow-[var(--shadow)]"
           >
             <div className="shrink-0">
-              <img src="/art-approval.svg" alt="Art Approval" width={56} height={56} />
+              <img src="/art-approval.svg" alt="Art Approval" width={56} height={56} className="icon-to-blue" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-[var(--text)] leading-tight mb-2">
@@ -43,7 +43,7 @@ export default function FeatureCards() {
             className="md:row-span-2 bg-[var(--bg-card)] rounded-[16px] border border-[var(--border)] p-7 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-[var(--shadow)]"
           >
             <div className="mb-4">
-              <img src="/ai-agents.svg" alt="AI Agents" width={80} height={80} />
+              <img src="/ai-agents.svg" alt="AI Agents" width={80} height={80} className="icon-to-blue" />
             </div>
             <h3 className="text-xl font-bold text-[var(--text)] leading-tight mb-2">
               {features[4].title}
@@ -59,7 +59,7 @@ export default function FeatureCards() {
             className="bg-[var(--bg-card)] rounded-[16px] border border-[var(--border)] p-7 transition-all duration-300 hover:shadow-[var(--shadow)]"
           >
             <div className="mb-4">
-              <img src="/real-time.svg" alt="Real-Time Tracking" width={56} height={56} />
+              <img src="/real-time.svg" alt="Real-Time Tracking" width={56} height={56} className="icon-to-blue" />
             </div>
             <h3 className="text-lg font-bold text-[var(--text)] leading-tight mb-2">
               {features[1].title}
@@ -84,7 +84,7 @@ export default function FeatureCards() {
             </svg>
 
             <div className="mb-4">
-              <img src="/customer.svg" alt="Customer Portal" width={56} height={56} />
+              <img src="/customer.svg" alt="Customer Portal" width={56} height={56} className="icon-to-blue" />
             </div>
             <h3 className="text-lg font-bold text-[var(--text)] leading-tight mb-2">
               {features[3].title}
@@ -100,7 +100,7 @@ export default function FeatureCards() {
             className="md:col-span-2 bg-[var(--bg-card)] rounded-[16px] border border-[var(--border)] p-7 flex items-center gap-6 transition-all duration-300 hover:shadow-[var(--shadow)]"
           >
             <div className="shrink-0">
-              <img src="/quoting.svg" alt="Quoting System" width={56} height={56} />
+              <img src="/quoting.svg" alt="Quoting System" width={56} height={56} className="icon-to-blue" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-[var(--text)] leading-tight mb-2">
@@ -117,7 +117,7 @@ export default function FeatureCards() {
             className="bg-[var(--bg-card)] rounded-[16px] border border-[var(--border)] p-7 transition-all duration-300 hover:shadow-[var(--shadow)]"
           >
             <div className="mb-4">
-              <img src="/n8n.svg" alt="N8N Integrations" width={56} height={56} />
+              <img src="/n8n.svg" alt="N8N Integrations" width={56} height={56} className="icon-to-blue" />
             </div>
             <h3 className="text-lg font-bold text-[var(--text)] leading-tight mb-2">
               {features[5].title}
