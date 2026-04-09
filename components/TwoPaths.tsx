@@ -114,9 +114,9 @@ export default function TwoPaths() {
           {/* Right — What You Control (Shop Titan) */}
           <div
             data-path-card
-            className="group relative rounded-[16px] border border-[var(--structural-border)] bg-[var(--bg-secondary)] pt-16 pb-8 px-8 md:pt-18 md:pb-10 md:px-10 flex flex-col transition-all duration-300 hover:border-black/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] overflow-visible will-change-transform"
+            className="group relative rounded-[16px] border border-[var(--structural-border)] bg-[var(--bg-card)] pt-16 pb-8 px-8 md:pt-18 md:pb-10 md:px-10 flex flex-col transition-all duration-300 hover:border-black/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] overflow-visible will-change-transform"
           >
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-[var(--bg-secondary)] border border-[var(--structural-border)] shadow-[var(--shadow)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-[var(--bg-card)] border border-[var(--structural-border)] shadow-[var(--shadow)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg className="w-7 h-7 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
               </svg>
