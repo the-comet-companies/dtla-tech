@@ -45,7 +45,7 @@ export default function Hero() {
       <div className="w-full max-w-[90rem] mx-auto px-[var(--container-padding-x)] relative z-10 py-20 lg:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-12 items-center">
           {/* Left — Text content */}
-          <div>
+          <div className="text-center lg:text-left">
             <div className="mb-8" data-hero="tag" style={{ opacity: 0 }}>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] text-sm font-medium text-white">
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />
@@ -68,14 +68,14 @@ export default function Hero() {
             </h1>
 
             <p
-              className="text-[1.0625rem] leading-relaxed text-[var(--text-secondary)] max-w-[28rem]"
+              className="text-[1.0625rem] leading-relaxed text-[var(--text-secondary)] max-w-[28rem] mx-auto lg:mx-0"
               data-hero="sub"
               style={{ opacity: 0 }}
             >
               {hero.subtitle}
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-3" data-hero="ctas" style={{ opacity: 0 }}>
+            <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start" data-hero="ctas" style={{ opacity: 0 }}>
               <InteractiveHoverButton href={hero.ctaPrimary.href} variant="primary">
                 {hero.ctaPrimary.text}
               </InteractiveHoverButton>

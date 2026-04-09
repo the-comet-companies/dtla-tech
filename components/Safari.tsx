@@ -67,7 +67,7 @@ export function Safari({
 
       {!hasVideo && imageSrc && (
         <div
-          className="pointer-events-none absolute z-0 overflow-hidden"
+          className="pointer-events-none absolute z-0 overflow-hidden bg-white"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,

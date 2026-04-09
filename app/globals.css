@@ -104,6 +104,28 @@ body {
   pointer-events: none;
 }
 
+/* Styled horizontal scrollbar for sub-tabs */
+.subtab-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 102, 204, 0.25) transparent;
+}
+.subtab-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.subtab-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+  margin: 0 8px;
+}
+.subtab-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 204, 0.2);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.subtab-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 102, 204, 0.4);
+}
+
 /* Shift coral/red SVG illustrations to blue — preserves tonal detail */
 .icon-to-blue {
   filter: hue-rotate(200deg) saturate(1.4);

@@ -65,13 +65,13 @@ export default function AIPlatform() {
 
         {/* ── AI Models — horizontal strip ── */}
         <div
-          className="flex items-center justify-center gap-14 md:gap-24 mb-20"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-14 md:gap-24 mb-20"
           data-ai-reveal
         >
           {aiModels.map((model) => (
             <div
               key={model.name}
-              className="group flex flex-col items-center gap-4 cursor-pointer"
+              className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer"
             >
               <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl border border-transparent transition-all duration-200 group-hover:border-[var(--structural-border)] group-hover:bg-black/[0.02]">
                 <img

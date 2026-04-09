@@ -115,10 +115,10 @@ function SubTabBar({
   layoutId: string;
 }) {
   return (
-    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/80 backdrop-blur-md py-4 mb-10 md:mb-14 px-4 md:px-8">
+    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/80 backdrop-blur-md py-4 mb-10 md:mb-14">
       <LayoutGroup>
-        <div className="relative">
-          <div className="flex gap-1.5 overflow-x-auto pb-1 justify-center scrollbar-hide">
+        <div className="relative max-w-full overflow-hidden px-4 md:px-8">
+          <div className="flex gap-1.5 overflow-x-auto pb-3 subtab-scroll">
             {features.map((f, i) => (
               <button
                 key={f.id}
