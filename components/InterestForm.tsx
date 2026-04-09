@@ -1,15 +1,19 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { submitStep1, submitStep2 } from "@/app/actions";
+import { submitStep1, submitForm } from "@/app/actions";
 import { differenceSection, differenceItems, interestFormSection, interestOptions, shopTypeOptions, orderVolumeOptions } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "./ui/Select";
 
 export default function InterestForm() {
   const [step, setStep] = useState(1);
   const [isComplete, setIsComplete] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [email, setEmail] = useState("");
+  const [step1Data, setStep1Data] = useState<{ companyName: string; yourName: string; email: string; phone: string }>({ companyName: "", yourName: "", email: "", phone: "" });
+  const [interestedIn, setInterestedIn] = useState("");
+  const [shopType, setShopType] = useState("");
+  const [orderVolume, setOrderVolume] = useState("");
   const [isPending, startTransition] = useTransition();
 
   function handleStep1(formData: FormData) {
@@ -17,7 +21,12 @@ export default function InterestForm() {
     startTransition(async () => {
       const result = await submitStep1(formData);
       if (result.success) {
-        setEmail(formData.get("email") as string);
+        setStep1Data({
+          companyName: formData.get("companyName") as string,
+          yourName: formData.get("yourName") as string,
+          email: formData.get("email") as string,
+          phone: (formData.get("phone") as string) || "",
+        });
         setStep(2);
       } else {
         setError(result.error || "Something went wrong.");
@@ -27,9 +36,13 @@ export default function InterestForm() {
 
   function handleStep2(formData: FormData) {
     setError(null);
-    formData.append("email", email);
+    // Append step 1 data to the form
+    formData.append("companyName", step1Data.companyName);
+    formData.append("yourName", step1Data.yourName);
+    formData.append("email", step1Data.email);
+    formData.append("phone", step1Data.phone);
     startTransition(async () => {
-      const result = await submitStep2(formData);
+      const result = await submitForm(formData);
       if (result.success) {
         setIsComplete(true);
       } else {
@@ -39,7 +52,7 @@ export default function InterestForm() {
   }
 
   const inputClasses =
-    "w-full rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3.5 text-[var(--text)] text-[0.9375rem] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--brand)] focus:shadow-[var(--shadow-focus)] transition-all duration-200";
+    "w-full rounded-md border border-[var(--structural-border)] bg-[var(--bg-card)] px-4 py-3.5 text-[var(--text)] text-[0.9375rem] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--brand)] focus:shadow-[var(--shadow-focus)] transition-all duration-200";
 
   return (
     <section
@@ -97,9 +110,29 @@ export default function InterestForm() {
               <h3 className="text-2xl font-bold text-[var(--text)] mb-3">
                 {interestFormSection.successTitle}
               </h3>
-              <p className="text-[0.9375rem] text-[var(--text)] opacity-75">
+              <p className="text-[0.9375rem] text-[var(--text-secondary)] mb-8">
                 {interestFormSection.successMessage}
               </p>
+              <button
+                onClick={() => {
+                  setIsComplete(false);
+                  setStep(1);
+                  setError(null);
+                  setStep1Data({ companyName: "", yourName: "", email: "", phone: "" });
+                  setInterestedIn("");
+                  setShopType("");
+                  setOrderVolume("");
+                }}
+                className="group/btn relative overflow-hidden inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] transition-all duration-300 cursor-pointer"
+              >
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[var(--bg-body)] opacity-0 transition-all duration-500 group-hover/btn:scale-[100] group-hover/btn:opacity-100" />
+                <div className="flex items-center justify-center">
+                  <span className="inline-block transition-all duration-300 group-hover/btn:translate-x-12 group-hover/btn:opacity-0">Send another request</span>
+                </div>
+                <div className="absolute top-0 left-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-[var(--brand)] opacity-0 transition-all duration-300 group-hover/btn:translate-x-0 group-hover/btn:opacity-100">
+                  <span>Send another request</span>
+                </div>
+              </button>
             </div>
           ) : (
             <div className="bg-[var(--bg-card)] rounded-[14px] border border-[var(--border)] p-7 md:p-10 shadow-[var(--shadow)]">
@@ -184,7 +217,7 @@ export default function InterestForm() {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="group/btn w-full mt-2 relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                    className="cursor-pointer group/btn w-full mt-2 relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                   >
                     {isPending ? (
                       <>
@@ -213,37 +246,52 @@ export default function InterestForm() {
               ) : (
                 <form action={handleStep2} className="space-y-4">
                   <div>
-                    <label htmlFor="interestedIn" className="block text-sm font-medium text-[var(--text)] mb-2">
+                    <label className="block text-sm font-medium text-[var(--text)] mb-2">
                       What are you interested in? <span className="text-[var(--brand)]">*</span>
                     </label>
-                    <select id="interestedIn" name="interestedIn" required className={inputClasses}>
-                      <option value="">Select an option</option>
-                      {interestOptions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
+                    <input type="hidden" name="interestedIn" value={interestedIn} />
+                    <Select value={interestedIn} onValueChange={setInterestedIn}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {interestOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
-                    <label htmlFor="shopType" className="block text-sm font-medium text-[var(--text)] mb-2">
+                    <label className="block text-sm font-medium text-[var(--text)] mb-2">
                       Shop Type <span className="text-[var(--brand)]">*</span>
                     </label>
-                    <select id="shopType" name="shopType" required className={inputClasses}>
-                      <option value="">Select your shop type</option>
-                      {shopTypeOptions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
+                    <input type="hidden" name="shopType" value={shopType} />
+                    <Select value={shopType} onValueChange={setShopType}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your shop type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {shopTypeOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
-                    <label htmlFor="orderVolume" className="block text-sm font-medium text-[var(--text)] mb-2">
+                    <label className="block text-sm font-medium text-[var(--text)] mb-2">
                       Monthly Order Volume <span className="text-[var(--brand)]">*</span>
                     </label>
-                    <select id="orderVolume" name="orderVolume" required className={inputClasses}>
-                      <option value="">Select your volume</option>
-                      {orderVolumeOptions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
+                    <input type="hidden" name="orderVolume" value={orderVolume} />
+                    <Select value={orderVolume} onValueChange={setOrderVolume}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your volume" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {orderVolumeOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
                     <label htmlFor="currentSoftware" className="block text-sm font-medium text-[var(--text)] mb-2">
@@ -261,7 +309,7 @@ export default function InterestForm() {
                     <button
                       type="button"
                       onClick={() => { setStep(1); setError(null); }}
-                      className="group/btn relative overflow-hidden inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-transparent text-[var(--text)] font-semibold text-[0.9375rem] border-2 border-[var(--border)] transition-all duration-300"
+                      className="cursor-pointer group/btn relative overflow-hidden inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-transparent text-[var(--text)] font-semibold text-[0.9375rem] border-2 border-[var(--border)] transition-all duration-300"
                     >
                       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-[var(--brand)] opacity-0 transition-all duration-500 group-hover/btn:scale-[100] group-hover/btn:opacity-100" />
                       <div className="flex items-center justify-center">
@@ -277,7 +325,7 @@ export default function InterestForm() {
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="group/btn flex-1 relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                      className="cursor-pointer group/btn flex-1 relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--brand)] text-white font-semibold text-[0.9375rem] border-2 border-[var(--brand)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                     >
                       {isPending ? (
                         <>
