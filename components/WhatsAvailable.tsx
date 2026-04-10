@@ -46,8 +46,20 @@ export default function WhatsAvailable() {
                     key={bullet}
                     className="flex items-start gap-3 text-[0.9375rem] text-[var(--text)] opacity-75"
                   >
-                    <svg className="w-4 h-4 shrink-0 mt-0.5 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-4 h-4 shrink-0 mt-0.5 text-[var(--brand)]"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path
+                        d="M9 12l2 2 4-4"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                     {bullet}
                   </li>

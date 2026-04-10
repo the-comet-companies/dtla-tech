@@ -122,8 +122,20 @@ export default function HeroBento() {
                 <ul className="mt-2 space-y-1.5">
                   {card.bullets.map((b) => (
                     <li key={b} className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--text)]">
-                      <svg className="w-3 h-3 shrink-0 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      <svg
+                        className="w-4 h-4 shrink-0 mt-0.5 text-[var(--brand)]"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path
+                          d="M9 12l2 2 4-4"
+                          fill="none"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                       {b}
                     </li>
