@@ -242,7 +242,7 @@ export const tabbedFeaturesSection = {
       label: "Shop Titan (FileMaker)",
       mobileLabel: "Shop Titan",
       cta: "Explore Shop Titan",
-      href: "https://shop-titan-ebon.vercel.app/",
+      href: "https://shoptitan.app/",
     },
   },
 };
