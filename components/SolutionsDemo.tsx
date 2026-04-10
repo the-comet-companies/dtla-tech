@@ -178,7 +178,7 @@ function SubTabBar({
   layoutId: string;
 }) {
   return (
-    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/90 backdrop-blur-md py-4 mb-10 md:mb-14 border-y border-[var(--structural-border)]">
+    <div className="sticky top-0 z-20 py-4 mb-10 md:mb-14">
       <LayoutGroup>
         <div className="relative px-4 md:px-8">
           <div className="flex gap-1.5 overflow-x-auto pb-3 subtab-scroll mx-auto w-fit max-w-full">
@@ -189,7 +189,7 @@ function SubTabBar({
                 className={`relative flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-colors cursor-pointer ${
                   activeIndex === i
                     ? "text-white"
-                    : "border border-[var(--structural-border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--brand)]/30"
+                    : "bg-white border border-[var(--structural-border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--brand)]/30 shadow-sm"
                 }`}
               >
                 {activeIndex === i && (

@@ -198,6 +198,29 @@ body {
   background: rgba(0, 102, 204, 0.4);
 }
 
+/* Prevent Material Symbols from flashing text or causing layout shifts */
+.material-symbols-outlined {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  min-width: 24px !important;
+  overflow: hidden !important;
+  vertical-align: middle;
+  white-space: nowrap !important;
+  /* Shift text out of view until icons load */
+  color: transparent;
+  transition: color 0.1s;
+}
+
+/* Once font is likely loaded or at least after a tiny delay, show color */
+/* Actually, liga needs color to show. So we'll use a better approach: */
+.material-symbols-outlined {
+  color: inherit;
+}
+
 /* Shift coral/red SVG illustrations to blue — preserves tonal detail */
 .icon-to-blue {
   filter: hue-rotate(200deg) saturate(1.4);
