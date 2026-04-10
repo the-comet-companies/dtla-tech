@@ -122,13 +122,45 @@ export default function AIPlatform() {
                   <div className="flex flex-col gap-16">
                     {/* Website Brain */}
                     <a href="https://www.dtlaprint.com/" target="_blank" rel="noopener noreferrer" className="z-20">
-                      <Circle ref={div5Ref} className="size-28 border-[var(--brand)] bg-white shadow-sm p-5 cursor-pointer hover:border-[var(--brand)]/60 transition-colors">
+                      <Circle 
+                        ref={div5Ref} 
+                        className="size-28 border-[var(--structural-border)] bg-white shadow-sm p-5 cursor-pointer hover:border-[var(--brand)]/60 transition-colors"
+                        animate={{
+                          boxShadow: [
+                            "0 0 0px 0px rgba(0, 102, 204, 0)",
+                            "0 0 25px 4px rgba(0, 102, 204, 0.35)",
+                            "0 0 0px 0px rgba(0, 102, 204, 0)"
+                          ],
+                          borderColor: ["var(--structural-border)", "var(--brand)", "var(--structural-border)"]
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      >
                         <img src="/logos/website.png" alt="Website" className="w-16 h-16 object-contain" />
                       </Circle>
                     </a>
                     {/* FileMaker Brain */}
                     <a href="https://shoptitan.app/" target="_blank" rel="noopener noreferrer" className="z-20">
-                      <Circle ref={div6Ref} className="size-28 border-[var(--brand)] bg-white shadow-sm p-5 cursor-pointer hover:border-[var(--brand)]/60 transition-colors">
+                      <Circle 
+                        ref={div6Ref} 
+                        className="size-28 border-[var(--structural-border)] bg-white shadow-sm p-5 cursor-pointer hover:border-[var(--brand)]/60 transition-colors"
+                        animate={{
+                          boxShadow: [
+                            "0 0 0px 0px rgba(0, 102, 204, 0)",
+                            "0 0 25px 4px rgba(0, 102, 204, 0.35)",
+                            "0 0 0px 0px rgba(0, 102, 204, 0)"
+                          ],
+                          borderColor: ["var(--structural-border)", "var(--brand)", "var(--structural-border)"]
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      >
                         <img src="/logos/filemaker.png" alt="FileMaker" className="w-16 h-16 object-contain" />
                       </Circle>
                     </a>
@@ -166,7 +198,7 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div5Ref}
-                duration={3}
+                duration={8}
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -174,8 +206,7 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div2Ref}
                 toRef={div5Ref}
-                duration={3}
-                delay={1}
+                duration={8}
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -183,8 +214,8 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div5Ref}
-                duration={3}
-                delay={0.5}
+                duration={8}
+                reverse
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -192,8 +223,8 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div4Ref}
                 toRef={div5Ref}
-                duration={3}
-                delay={1.5}
+                duration={8}
+                reverse
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -203,8 +234,7 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div6Ref}
-                duration={4}
-                delay={2}
+                duration={8}
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -212,8 +242,7 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div2Ref}
                 toRef={div6Ref}
-                duration={4}
-                delay={0.5}
+                duration={8}
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -221,8 +250,8 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div6Ref}
-                duration={4}
-                delay={1.2}
+                duration={8}
+                reverse
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -230,8 +259,8 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div4Ref}
                 toRef={div6Ref}
-                duration={4}
-                delay={0.8}
+                duration={8}
+                reverse
                 gradientStartColor="var(--brand)"
                 gradientStopColor="var(--brand)"
               />
@@ -241,7 +270,7 @@ export default function AIPlatform() {
                 containerRef={containerRef}
                 fromRef={div5Ref}
                 toRef={div6Ref}
-                duration={5}
+                duration={12}
                 curvature={20}
                 reverse
                 gradientStartColor="var(--brand)"

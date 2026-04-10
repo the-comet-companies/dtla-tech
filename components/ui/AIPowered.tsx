@@ -168,7 +168,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
                     transition={{
                         delay,
                         duration,
-                        ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
+                        ease: "linear",
                         repeat,
                         repeatDelay,
                     }}
@@ -187,22 +187,24 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     )
 }
 
-export const Circle = forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement> & { className?: string; children?: React.ReactNode }
->(({ className, children, ...props }, ref) => {
-    return (
-        <div
-            ref={ref}
-            className={cn(
-                "z-10 flex size-16 items-center justify-center rounded-full border border-[var(--structural-border)] p-3",
-                className,
-            )}
-            {...props}
-        >
-            {children}
-        </div>
-    )
-})
+export const Circle = motion.create(
+    forwardRef<
+        HTMLDivElement,
+        React.HTMLAttributes<HTMLDivElement> & { className?: string; children?: React.ReactNode }
+    >(({ className, children, ...props }, ref) => {
+        return (
+            <div
+                ref={ref}
+                className={cn(
+                    "z-10 flex size-16 items-center justify-center rounded-full border border-[var(--structural-border)] p-3",
+                    className,
+                )}
+                {...props}
+            >
+                {children}
+            </div>
+        )
+    })
+)
 
 Circle.displayName = "Circle"
