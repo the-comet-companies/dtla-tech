@@ -25,7 +25,15 @@ interface DemoFeature {
 }
 
 // ── Feature Panel ──
-function FeaturePanel({ feature }: { feature: DemoFeature }) {
+function FeaturePanel({
+  feature,
+  index,
+  total,
+}: {
+  feature: DemoFeature;
+  index: number;
+  total: number;
+}) {
   return (
     <motion.div
       key={feature.id}
@@ -33,48 +41,91 @@ function FeaturePanel({ feature }: { feature: DemoFeature }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.25 }}
-      className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start lg:items-start mb-12 md:mb-20 lg:mb-28"
+      className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start mb-12 md:mb-20 lg:mb-24"
     >
       {/* Left: Copy */}
-      <div className="lg:w-4/12 flex flex-col gap-4 order-2 lg:order-1">
+      <div className="lg:w-5/12 flex flex-col gap-5 order-2 lg:order-1">
+        {/* Big serial number */}
+        <motion.div
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex items-baseline gap-3 mb-1"
+        >
+          <span
+            className="text-[3rem] md:text-[4rem] font-bold leading-none tracking-tighter tabular-nums text-[var(--brand)] select-none"
+            style={{ fontFamily: "var(--font-accent)" }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--text-muted)]">
+            / {String(total).padStart(2, "0")}
+          </span>
+        </motion.div>
+
+        {/* Title */}
         <motion.h3
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.06 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1D1D1F] leading-tight"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text)] leading-[1.05] tracking-tight"
         >
           {feature.title}
         </motion.h3>
 
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.12 }}
-          className="relative p-4 border border-black/10 bg-white/40 backdrop-blur-md shadow-sm rounded-xl overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-24 h-24 bg-white/50 blur-2xl rounded-full pointer-events-none" />
-          <p className="text-xs font-bold uppercase tracking-widest text-rose-600 mb-1.5 relative z-10">
-            {feature.painPoint.label}
-          </p>
-          <p className="text-sm text-gray-600 leading-relaxed font-medium relative z-10">
-            {feature.painPoint.description}
-          </p>
-        </motion.div>
+        {/* FRICTION → FIX flow */}
+        <div className="relative mt-2">
+          {/* FRICTION card */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.12 }}
+            className="relative p-5 rounded-2xl border-l-[3px] border-rose-500 bg-rose-50/60"
+          >
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+              <p className="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-rose-600">
+                {feature.painPoint.label}
+              </p>
+            </div>
+            <p className="text-[0.9375rem] text-[var(--text)] leading-snug font-medium">
+              {feature.painPoint.description}
+            </p>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.18 }}
-          className="relative p-4 border border-black/10 bg-white/40 backdrop-blur-md shadow-sm rounded-xl overflow-hidden"
-        >
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/50 blur-2xl rounded-full pointer-events-none" />
-          <p className="text-xs font-bold uppercase tracking-widest text-[#0066CC] mb-1.5 relative z-10">
-            {feature.solution.label}
-          </p>
-          <p className="text-sm text-[#1D1D1F] leading-relaxed font-semibold relative z-10">
-            {feature.solution.description}
-          </p>
-        </motion.div>
+          {/* Connecting arrow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.22 }}
+            className="flex justify-center my-1"
+          >
+            <div className="flex flex-col items-center">
+              <div className="w-px h-3 bg-[var(--structural-border)]" />
+              <svg className="w-4 h-4 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </motion.div>
+
+          {/* FIX card */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.28 }}
+            className="relative p-5 rounded-2xl border-l-[3px] border-[var(--brand)] bg-[var(--brand-10)]"
+          >
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--brand)]" />
+              <p className="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-[var(--brand)]">
+                {feature.solution.label}
+              </p>
+            </div>
+            <p className="text-[0.9375rem] text-[var(--text)] leading-snug font-semibold">
+              {feature.solution.description}
+            </p>
+          </motion.div>
+        </div>
       </div>
 
       {/* Right: Device mockup */}
@@ -82,21 +133,33 @@ function FeaturePanel({ feature }: { feature: DemoFeature }) {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.08 }}
-        className="lg:w-8/12 w-full order-1 lg:order-2"
+        className="lg:w-7/12 w-full order-1 lg:order-2 relative"
       >
-        {feature.useMobileFrame ? (
-          <div className="flex items-center justify-center">
-            <div className="w-[220px] sm:w-[260px] md:w-[280px]">
-              <Iphone src={feature.imageSrc} />
+        {/* Subtle blue glow behind device */}
+        <div
+          aria-hidden="true"
+          className="absolute -inset-4 rounded-3xl pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(0,102,204,0.08) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative">
+          {feature.useMobileFrame ? (
+            <div className="flex items-center justify-center">
+              <div className="w-[220px] sm:w-[260px] md:w-[280px]">
+                <Iphone src={feature.imageSrc} />
+              </div>
             </div>
-          </div>
-        ) : (
-          <Safari
-            url={feature.browserUrl}
-            imageSrc={feature.imageSrc}
-            mode="default"
-          />
-        )}
+          ) : (
+            <Safari
+              url={feature.browserUrl}
+              imageSrc={feature.imageSrc}
+              mode="default"
+            />
+          )}
+        </div>
       </motion.div>
     </motion.div>
   );
@@ -115,7 +178,7 @@ function SubTabBar({
   layoutId: string;
 }) {
   return (
-    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/80 backdrop-blur-md py-4 mb-10 md:mb-14">
+    <div className="sticky top-0 z-20 bg-[var(--bg-secondary)]/90 backdrop-blur-md py-4 mb-10 md:mb-14 border-y border-[var(--structural-border)]">
       <LayoutGroup>
         <div className="relative px-4 md:px-8">
           <div className="flex gap-1.5 overflow-x-auto pb-3 subtab-scroll mx-auto w-fit max-w-full">
@@ -123,16 +186,16 @@ function SubTabBar({
               <button
                 key={f.id}
                 onClick={() => onSelect(i)}
-                className={`relative flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-medium whitespace-nowrap flex-shrink-0 transition-colors cursor-pointer ${
+                className={`relative flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-colors cursor-pointer ${
                   activeIndex === i
                     ? "text-white"
-                    : "border border-gray-200 text-gray-500 hover:text-[#1D1D1F] hover:border-[#0066CC]/30"
+                    : "border border-[var(--structural-border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--brand)]/30"
                 }`}
               >
                 {activeIndex === i && (
                   <motion.div
                     layoutId={layoutId}
-                    className="absolute inset-0 bg-[#0066CC] rounded-full"
+                    className="absolute inset-0 bg-[var(--brand)] rounded-full shadow-[0_4px_12px_rgba(0,102,204,0.35)]"
                     transition={{
                       type: "spring",
                       stiffness: 300,
@@ -191,7 +254,7 @@ function FeatureSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4"
+            className="text-3xl md:text-5xl font-bold text-[var(--text)] tracking-tight leading-tight mb-4"
           >
             {title}
           </motion.h2>
@@ -200,7 +263,7 @@ function FeatureSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-lg md:text-xl text-[#6E6E73] max-w-2xl mx-auto leading-relaxed"
+            className="text-base md:text-lg text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed"
           >
             {subtitle}
           </motion.p>
@@ -218,7 +281,12 @@ function FeatureSection({
       {/* Feature panel */}
       <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
         <AnimatePresence mode="wait">
-          <FeaturePanel key={activeFeature.id} feature={activeFeature} />
+          <FeaturePanel
+            key={activeFeature.id}
+            feature={activeFeature}
+            index={activeTab}
+            total={features.length}
+          />
         </AnimatePresence>
       </div>
     </div>
@@ -232,22 +300,109 @@ export default function SolutionsDemo() {
   return (
     <section
       id="demos"
-      className="w-full bg-[var(--bg-secondary)] relative"
+      className="w-full bg-[var(--bg-secondary)] relative overflow-hidden"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,102,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,204,0.03) 1px, transparent 1px)",
-        backgroundSize: "140px 140px",
+          "linear-gradient(rgba(0,102,204,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,204,0.05) 1px, transparent 1px)",
+        backgroundSize: "60px 60px",
       }}
     >
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
+      {/* ── Top crop marks ── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-7xl px-5 md:px-8 pointer-events-none"
+      >
+        <div className="relative">
+          <svg
+            className="absolute top-0 left-0 w-4 h-4 text-[var(--brand)] opacity-40"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M0 0 L0 16 M0 0 L16 0" strokeLinecap="square" />
+          </svg>
+          <svg
+            className="absolute top-0 right-0 w-4 h-4 text-[var(--brand)] opacity-40"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M16 0 L16 16 M0 0 L16 0" strokeLinecap="square" />
+          </svg>
+        </div>
+      </div>
+
+      {/* ── Section marker (top right) ── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-12 right-1/2 translate-x-[calc(50%-1.25rem)] md:translate-x-[calc(50%-2rem)] max-w-7xl pointer-events-none hidden md:block"
+      >
+      </div>
+
+      {/* ── Floating registration cross ⊕ ── */}
+      <svg
+        aria-hidden="true"
+        className="absolute top-1/3 left-[6%] w-10 h-10 text-[var(--brand)] opacity-[0.15] pointer-events-none hidden lg:block"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+      >
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 0 L16 32 M0 16 L32 16" strokeLinecap="square" />
+      </svg>
+
+      {/* ── Bottom crop marks ── */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-7xl px-5 md:px-8 pointer-events-none"
+      >
+        <div className="relative">
+          <svg
+            className="absolute bottom-0 left-0 w-4 h-4 text-[var(--brand)] opacity-40"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M0 0 L0 16 M0 16 L16 16" strokeLinecap="square" />
+          </svg>
+          <svg
+            className="absolute bottom-0 right-0 w-4 h-4 text-[var(--brand)] opacity-40"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M16 0 L16 16 M0 16 L16 16" strokeLinecap="square" />
+          </svg>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-5 md:px-8 relative">
         {/* Section heading */}
-        <div className="text-center pt-16 md:pt-20 mb-10 md:mb-14">
-          <motion.h2
+        <div className="text-center pt-16 md:pt-24 mb-10 md:mb-14">
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="text-3xl md:text-5xl font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[var(--structural-border)] text-sm font-medium text-[var(--text)] mb-6 shadow-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand)] opacity-50" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand)]" />
+            </span>
+            <span>{solutionsDemoSection.label}</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text)] tracking-tight leading-[1.05] mb-4"
           >
             {solutionsDemoSection.title}
           </motion.h2>
@@ -256,7 +411,7 @@ export default function SolutionsDemo() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-lg md:text-xl text-[#6E6E73] max-w-2xl mx-auto leading-relaxed"
+            className="text-base md:text-lg text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed"
           >
             {solutionsDemoSection.subtitle}
           </motion.p>
@@ -268,10 +423,10 @@ export default function SolutionsDemo() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+              className={`relative flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 activeTab === tab.id
-                  ? "bg-[#0066CC] text-white"
-                  : "border border-gray-200 text-[#6E6E73] hover:text-[#1D1D1F] hover:border-[#0066CC]/30"
+                  ? "bg-[var(--brand)] text-white shadow-[0_8px_24px_rgba(0,102,204,0.35)] scale-[1.02]"
+                  : "bg-white border border-[var(--structural-border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--brand)]/40 hover:shadow-sm"
               }`}
             >
               <span className="material-symbols-outlined text-base">
@@ -295,9 +450,9 @@ export default function SolutionsDemo() {
           >
             <FeatureSection
               badge="Your Storefront"
-              badgeColor="bg-teal-500/10 text-teal-600"
+              badgeColor="bg-teal-500/10 text-teal-700 border border-teal-500/20"
               title="A Website That Works as Hard as You Do"
-              subtitle="More than a website — a complete online storefront with custom ordering, product configuration, and seamless checkout built for print shops."
+              subtitle="A complete online storefront with custom ordering and seamless checkout — built for print shops."
               features={websiteDemoFeatures}
               layoutId="activeWebsiteTab"
             />
@@ -316,9 +471,9 @@ export default function SolutionsDemo() {
           >
             <FeatureSection
               badge="FileMaker System"
-              badgeColor="bg-[#0066CC]/10 text-[#0066CC]"
+              badgeColor="bg-[var(--brand)]/10 text-[var(--brand)] border border-[var(--brand)]/20"
               title="Your Back Office, Fully Automated"
-              subtitle="A powerful FileMaker-based system that runs your entire operation — from quoting and orders to scheduling and analytics."
+              subtitle="Run your entire operation — quoting, orders, scheduling, and analytics — in one place."
               features={filemakerDemoFeatures}
               layoutId="activeFilemakerTab"
             />
@@ -339,15 +494,11 @@ export default function SolutionsDemo() {
           >
             <a
               href="#interest-form"
-              className="px-8 py-3 min-h-[44px] text-base font-semibold text-[#1D1D1F] relative overflow-hidden group rounded-full inline-flex items-center gap-2 justify-center flex-shrink-0"
+              className="px-8 py-3.5 text-base font-semibold text-white relative overflow-hidden group rounded-full inline-flex items-center gap-2 justify-center bg-[var(--brand)] shadow-[0_8px_24px_rgba(0,102,204,0.35)] hover:shadow-[0_12px_32px_rgba(0,102,204,0.45)] transition-shadow duration-200"
             >
-              <div className="absolute inset-0 bg-white/20 group-hover:bg-white/30 transition-colors rounded-full" />
-              <div className="absolute inset-0 border-2 border-[#1D1D1F]/20 group-hover:border-[#1D1D1F]/30 transition-colors rounded-full" />
-              <span className="relative z-10">
-                Learn more about the Complete System
-              </span>
+              <span>Learn more about the Complete System</span>
               <span
-                className="material-symbols-outlined text-lg relative z-10 group-hover:translate-x-1 transition-transform"
+                className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
                 aria-hidden="true"
               >
                 arrow_forward
@@ -357,7 +508,6 @@ export default function SolutionsDemo() {
         )}
       </AnimatePresence>
 
-      {/* Bottom padding for non-both tabs */}
       {activeTab !== "both" && <div className="pb-16 md:pb-20" />}
     </section>
   );

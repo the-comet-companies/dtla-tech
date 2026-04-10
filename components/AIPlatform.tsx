@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { aiPlatformSection, aiModels, aiCapabilities } from "@/lib/constants";
+import CircuitAccent from "./CircuitAccent";
+import MorphingText from "./MorphingText";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -42,10 +44,14 @@ export default function AIPlatform() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-[var(--section-padding-y)]"
+      className="w-full py-[var(--section-padding-y)] relative overflow-hidden"
       data-scroll-section
     >
-      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]">
+      {/* Animated circuit accents — left + right edges */}
+      <CircuitAccent variant="left" opacity={0.35} />
+      <CircuitAccent variant="right" opacity={0.35} />
+
+      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] relative">
         {/* ── Header ── */}
         <div className="max-w-2xl mx-auto text-center mb-20" data-ai-reveal>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-[var(--structural-border)] text-sm font-medium text-[var(--text)] mb-6">
@@ -56,7 +62,11 @@ export default function AIPlatform() {
             <span>{aiPlatformSection.label}</span>
           </div>
           <h2 className="text-[clamp(1.75rem,1.4rem+1vw,2.5rem)] font-bold leading-[1.1] text-[var(--text)] mb-4">
-            {aiPlatformSection.title}
+            Powered by{" "}
+            <MorphingText
+              texts={["OpenAI", "Claude", "Gemini", "Perplexity"]}
+              className="text-[var(--brand)]"
+            />
           </h2>
           <p className="text-lg leading-relaxed text-[var(--text-secondary)]">
             {aiPlatformSection.subtitle}
@@ -71,13 +81,13 @@ export default function AIPlatform() {
           {aiModels.map((model) => (
             <div
               key={model.name}
-              className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer"
+              className="group flex flex-col items-center gap-3 sm:gap-4 "
             >
-              <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl border border-transparent transition-all duration-200 group-hover:border-[var(--structural-border)] group-hover:bg-black/[0.02]">
+              <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
                 <img
                   src={model.logo}
                   alt={model.name}
-                  className="w-12 h-12 md:w-16 md:h-16 object-contain opacity-50 transition-opacity duration-200 group-hover:opacity-100"
+                  className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-300 ease-out group-hover:scale-110"
                 />
               </div>
               <span className="text-sm font-medium text-[var(--text-muted)] tracking-wide transition-colors duration-200 group-hover:text-[var(--text)]">

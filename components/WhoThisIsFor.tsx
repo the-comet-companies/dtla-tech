@@ -45,10 +45,111 @@ export default function WhoThisIsFor() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] relative overflow-hidden"
       data-scroll-section
     >
-      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]">
+      {/* ── Faint 12-column grid hairlines ── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-[var(--container-padding-x)] pointer-events-none hidden md:block"
+      >
+        <div className="relative h-full grid grid-cols-12 gap-0">
+          {[2, 5, 8].map((col) => (
+            <div
+              key={col}
+              className="border-l border-black/[0.04] h-full"
+              style={{ gridColumnStart: col + 1 }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ── Top crop marks ── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-[var(--container-padding-x)] pointer-events-none"
+      >
+        <div className="relative">
+          {/* Top-left crop mark ┌ */}
+          <svg
+            className="absolute top-0 left-0 w-4 h-4 text-[var(--brand)] opacity-30"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          >
+            <path d="M0 0 L0 16 M0 0 L16 0" strokeLinecap="square" />
+          </svg>
+          {/* Top-right crop mark ┐ */}
+          <svg
+            className="absolute top-0 right-0 w-4 h-4 text-[var(--brand)] opacity-30"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          >
+            <path d="M16 0 L16 16 M0 0 L16 0" strokeLinecap="square" />
+          </svg>
+        </div>
+      </div>
+
+      {/* ── Section marker (top right) ── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-12 right-1/2 translate-x-[calc(50%-var(--container-padding-x))] max-w-[80rem] pointer-events-none hidden md:block"
+        style={{ right: "var(--container-padding-x)" }}
+      >
+        <div
+          className="text-[0.625rem] font-medium tracking-[0.25em] uppercase text-[var(--text-muted)] opacity-50"
+          style={{ fontFamily: "var(--font-accent)" }}
+        >
+          —  AUDIENCE / 05
+        </div>
+      </div>
+
+      {/* ── Floating registration cross ⊕ ── */}
+      <svg
+        aria-hidden="true"
+        className="absolute top-1/2 left-[8%] -translate-y-1/2 w-8 h-8 text-[var(--brand)] opacity-[0.12] pointer-events-none hidden lg:block"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+      >
+        <circle cx="16" cy="16" r="14" />
+        <path d="M16 0 L16 32 M0 16 L32 16" strokeLinecap="square" />
+      </svg>
+
+      {/* ── Bottom crop marks ── */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-[80rem] px-[var(--container-padding-x)] pointer-events-none"
+      >
+        <div className="relative">
+          {/* Bottom-left crop mark └ */}
+          <svg
+            className="absolute bottom-0 left-0 w-4 h-4 text-[var(--brand)] opacity-30"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          >
+            <path d="M0 0 L0 16 M0 16 L16 16" strokeLinecap="square" />
+          </svg>
+          {/* Bottom-right crop mark ┘ */}
+          <svg
+            className="absolute bottom-0 right-0 w-4 h-4 text-[var(--brand)] opacity-30"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          >
+            <path d="M16 0 L16 16 M0 16 L16 16" strokeLinecap="square" />
+          </svg>
+        </div>
+      </div>
+
+      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] relative">
 
         {/* ── Swiss-style header: asymmetric 2-col ── */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20">

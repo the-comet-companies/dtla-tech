@@ -1,22 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { painPoints, problemsSection } from "@/lib/constants";
 import InteractiveHoverButton from "./InteractiveHoverButton";
 import { TypingAnimation } from "./TypingAnimation";
 
-const CYCLE_MS = 3000;
-
 export default function Problems() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % painPoints.length);
-    }, CYCLE_MS);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section
       id="problem"
@@ -57,66 +45,35 @@ export default function Problems() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-[var(--border)] rounded-[14px] overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-[var(--structural-border)] rounded-[14px] overflow-hidden">
           {painPoints.map((point, i) => {
             const isLast = i === painPoints.length - 1;
-            const isActive = i === activeIndex;
 
             return (
               <div
                 key={point.number}
                 data-scroll-item
-                className={`group relative p-6 overflow-hidden transition-colors duration-500 ${
-                  isActive ? "bg-[var(--bg-card)]" : "bg-[var(--bg-card)]/60"
+                className={`group relative p-6 overflow-hidden bg-[var(--bg-card)] transition-colors duration-300 ${
+                  isLast ? "sm:col-span-2 border-t border-[var(--structural-border)]" : ""
                 } ${
-                  isLast ? "sm:col-span-2 border-t border-[var(--border)]" : ""
-                } ${
-                  !isLast && i <= 1 ? "border-b border-[var(--border)]" : ""
+                  !isLast && i <= 1 ? "border-b border-[var(--structural-border)]" : ""
                 } ${
                   !isLast && i % 2 === 0
-                    ? "sm:border-r sm:border-[var(--border)]"
+                    ? "sm:border-r sm:border-[var(--structural-border)]"
                     : ""
                 }`}
               >
-                {/* Shimmer sweep — only on active card */}
-                {isActive && (
-                  <div
-                    key={`shimmer-${activeIndex}`}
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(105deg, transparent 40%, rgba(0,102,204,0.04) 45%, rgba(0,102,204,0.08) 50%, rgba(0,102,204,0.04) 55%, transparent 60%)",
-                      backgroundSize: "200% 100%",
-                      animation: "problemShimmer 2s ease-in-out forwards",
-                    }}
-                  />
-                )}
+                {/* Shimmer sweep — triggered on hover */}
+                <div className="problem-shimmer absolute inset-0 pointer-events-none" />
 
-                <div
-                  className="relative flex items-start gap-5 transition-opacity duration-500"
-                  style={{ opacity: isActive ? 1 : 0.4 }}
-                >
-                  {/* Number badge — pulses only when active */}
-                  <span
-                    className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-[0.75rem] bg-[var(--brand-10)] text-[var(--brand)] text-sm font-bold"
-                    style={{
-                      animation: isActive
-                        ? "problemPulse 1.5s ease-in-out infinite"
-                        : "none",
-                    }}
-                  >
+                <div className="relative flex items-start gap-5">
+                  {/* Number badge — pulses on hover */}
+                  <span className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-[0.75rem] bg-[var(--brand-10)] text-[var(--brand)] text-sm font-bold problem-badge">
                     {String(point.number).padStart(2, "0")}
                   </span>
                   <div>
-                    {/* Title — glitches only when active */}
-                    <h3
-                      className="text-lg font-bold text-[var(--text)] leading-tight mb-1.5"
-                      style={{
-                        animation: isActive
-                          ? "problemGlitch 2s ease-in-out 1"
-                          : "none",
-                      }}
-                    >
+                    {/* Title — glitches on hover */}
+                    <h3 className="text-lg font-bold text-[var(--text)] leading-tight mb-1.5 problem-title">
                       {point.title}
                     </h3>
                     <p className="text-[0.9375rem] leading-relaxed text-[var(--text)] opacity-75">

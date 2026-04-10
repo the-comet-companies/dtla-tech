@@ -131,6 +131,32 @@ body {
   filter: hue-rotate(200deg) saturate(1.4);
 }
 
+/* Problems section — animations only trigger on card hover */
+.problem-badge {
+  animation: none;
+}
+.group:hover .problem-badge {
+  animation: problemPulse 1.5s ease-in-out infinite;
+}
+.problem-title {
+  animation: none;
+}
+.group:hover .problem-title {
+  animation: problemGlitch 2s ease-in-out 1;
+}
+.problem-shimmer {
+  background-image: linear-gradient(105deg, transparent 30%, rgba(0,102,204,0.08) 42%, rgba(0,102,204,0.18) 50%, rgba(0,102,204,0.08) 58%, transparent 70%);
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.group:hover .problem-shimmer {
+  opacity: 1;
+  animation: problemShimmer 1.8s ease-in-out infinite;
+}
+
 [data-animate] {
   will-change: transform, opacity;
 }
@@ -138,6 +164,29 @@ body {
 @keyframes progressBar {
   from { width: 0%; }
   to { width: 100%; }
+}
+
+@keyframes featureFadeIn {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes scanLineVertical {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 /* Blinking cursor for typing animation */

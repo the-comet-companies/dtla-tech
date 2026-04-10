@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { twoPathsSection, workflowSteps } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import Marquee from "./Marquee";
+import CircuitAccent from "./CircuitAccent";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -57,8 +58,12 @@ export default function TwoPaths() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)]" data-scroll-section>
-      <div className="w-full px-[var(--container-padding-x)]" data-scroll-content>
+    <section ref={sectionRef} className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] relative overflow-hidden" data-scroll-section>
+      {/* Vertical circuit accents — left + right edges */}
+      <CircuitAccent variant="left" opacity={0.3} />
+      <CircuitAccent variant="right" opacity={0.3} />
+
+      <div className="w-full px-[var(--container-padding-x)] relative" data-scroll-content>
         <div className="text-center mb-16 max-w-[80rem] mx-auto" data-scroll-heading>
           <SectionHeading
             label={twoPathsSection.label}
@@ -89,9 +94,9 @@ export default function TwoPaths() {
             </p>
 
             <div className="space-y-3 mb-8 flex-1">
-              {workflowSteps.filter(s => s.side === "both").map((step) => (
-                <div key={step.number} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
-                  <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{step.number}</span>
+              {workflowSteps.filter(s => s.side === "both").map((step, i) => (
+                <div key={step.label} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
+                  <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <p className="text-sm font-semibold text-[var(--text)]">{step.label}</p>
                     <p className="text-xs text-[var(--text-muted)]">{step.description}</p>
@@ -131,9 +136,9 @@ export default function TwoPaths() {
             </p>
 
             <div className="space-y-3 mb-8 flex-1">
-              {workflowSteps.map((step) => (
-                <div key={step.number} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
-                  <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{step.number}</span>
+              {workflowSteps.map((step, i) => (
+                <div key={step.label} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
+                  <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <p className="text-sm font-semibold text-[var(--text)]">{step.label}</p>
                     <p className="text-xs text-[var(--text-muted)]">{step.description}</p>

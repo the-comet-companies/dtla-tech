@@ -120,14 +120,14 @@ export default function MorphingText({
 
   return (
     <span
-      className={`relative inline-block [filter:url(#threshold)_blur(0.6px)] ${className}`}
+      className={`relative inline-block text-left [filter:url(#threshold)_blur(0.6px)] ${className}`}
     >
       <span
-        className="absolute inset-0 inline-block w-full"
+        className="absolute inset-0 inline-block w-full text-left"
         ref={text1Ref}
       />
       <span
-        className="absolute inset-0 inline-block w-full"
+        className="absolute inset-0 inline-block w-full text-left"
         ref={text2Ref}
       />
       {/* Invisible text to hold width for the longest word */}

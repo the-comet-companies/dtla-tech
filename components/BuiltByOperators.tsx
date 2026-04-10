@@ -1,14 +1,20 @@
 import { builtByOperatorsSection, operatorStats } from "@/lib/constants";
+import CircuitAccent from "./CircuitAccent";
+import MorphingText from "./MorphingText";
 
 export default function BuiltByOperators() {
 
   return (
     <section
       id="about"
-      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] overflow-hidden border-y border-[var(--structural-border)]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] overflow-hidden border-y border-[var(--structural-border)] relative"
       data-scroll-section
     >
-      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]" data-scroll-content>
+      {/* Horizontal circuit accents — top + bottom */}
+      <CircuitAccent variant="top" opacity={0.35} />
+      <CircuitAccent variant="bottom" opacity={0.35} />
+
+      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] relative" data-scroll-content>
         <div data-scroll-heading className="text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-[var(--structural-border)] text-sm font-medium text-[var(--text)] mb-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
             <span className="w-2 h-2 rounded-full bg-[var(--brand)]" />
@@ -17,7 +23,11 @@ export default function BuiltByOperators() {
           <h2 className="text-[clamp(1.75rem,1.4rem+1vw,2.5rem)] font-bold leading-[1.1] text-[var(--text)] max-w-3xl mx-auto mb-6">
             {builtByOperatorsSection.titleLine1}
             <br />
-            {builtByOperatorsSection.titleLine2}
+            It&apos;s{" "}
+            <MorphingText
+              texts={["battle-tested.", "production-proven.", "shop-hardened.", "real-world ready."]}
+              className="text-[var(--brand)]"
+            />
           </h2>
           <p className="text-lg leading-relaxed text-[var(--text-secondary)] max-w-2xl mx-auto mb-12">
             {builtByOperatorsSection.description}
