@@ -99,12 +99,7 @@ export default function WhoThisIsFor() {
         className="absolute top-12 right-1/2 translate-x-[calc(50%-var(--container-padding-x))] max-w-[80rem] pointer-events-none hidden md:block"
         style={{ right: "var(--container-padding-x)" }}
       >
-        <div
-          className="text-[0.625rem] font-medium tracking-[0.25em] uppercase text-[var(--text-muted)] opacity-50"
-          style={{ fontFamily: "var(--font-accent)" }}
-        >
-          —  AUDIENCE / 05
-        </div>
+        
       </div>
 
       {/* ── Floating registration cross ⊕ ── */}
