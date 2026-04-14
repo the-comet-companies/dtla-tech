@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { submitStep1, submitForm } from "@/app/actions";
 import { differenceSection, differenceItems, interestFormSection, interestOptions, shopTypeOptions, orderVolumeOptions } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
+import CircuitAccent from "./CircuitAccent";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "./ui/Select";
 
 export default function InterestForm() {
@@ -57,9 +58,12 @@ export default function InterestForm() {
   return (
     <section
       id="interest-form"
-      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)]"
+      className="w-full py-[var(--section-padding-y)] bg-[var(--bg-secondary)] relative overflow-hidden"
     >
-      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)]">
+      <CircuitAccent variant="left" opacity={0.3} />
+      <CircuitAccent variant="right" opacity={0.3} />
+
+      <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] relative">
 
         {/* ===== The DTLA Print Difference ===== */}
         <div className="mb-24" data-scroll-section>

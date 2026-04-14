@@ -7,6 +7,7 @@ import { twoPathsSection, workflowSteps } from "@/lib/constants";
 import SectionHeading from "./SectionHeading";
 import Marquee from "./Marquee";
 import CircuitAccent from "./CircuitAccent";
+import { AnimatedList } from "./ui/AnimatedList";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -93,7 +94,7 @@ export default function TwoPaths() {
               {twoPathsSection.frontend.description}
             </p>
 
-            <div className="space-y-3 mb-8 flex-1">
+            <AnimatedList className="!gap-3 mb-8 flex-1" delay={1200} cycleDuration={10000}>
               {workflowSteps.filter(s => s.side === "both").map((step, i) => (
                 <div key={step.label} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
                   <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{String(i + 1).padStart(2, "0")}</span>
@@ -103,7 +104,7 @@ export default function TwoPaths() {
                   </div>
                 </div>
               ))}
-            </div>
+            </AnimatedList>
 
             <div className="space-y-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <Marquee pauseOnHover className="[--duration:22s]">
@@ -119,10 +120,16 @@ export default function TwoPaths() {
           {/* Right — What You Control (Shop Titan) */}
           <div
             data-path-card
-            className="group relative rounded-[16px] border border-[var(--structural-border)] bg-[var(--bg-card)] pt-16 pb-8 px-8 md:pt-18 md:pb-10 md:px-10 flex flex-col transition-all duration-300 hover:border-black/[0.12] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] overflow-visible will-change-transform"
+            className="group relative rounded-[16px] border-2 border-[var(--brand)]/30 bg-gradient-to-br from-[var(--brand-10)] to-[var(--bg-card)] pt-16 pb-8 px-8 md:pt-18 md:pb-10 md:px-10 flex flex-col transition-all duration-300 hover:border-[var(--brand)]/50 hover:shadow-[0_8px_32px_rgba(240,92,78,0.12)] overflow-visible will-change-transform"
           >
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-[var(--bg-card)] border border-[var(--structural-border)] shadow-[var(--shadow)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <svg className="w-7 h-7 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            {/* Primary badge */}
+            <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--brand)] text-white text-[0.6875rem] font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              Where you live
+            </div>
+
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-[var(--brand)] border-2 border-[var(--brand)] shadow-[0_8px_24px_rgba(240,92,78,0.25)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
               </svg>
             </div>
@@ -135,7 +142,7 @@ export default function TwoPaths() {
               {twoPathsSection.backend.description}
             </p>
 
-            <div className="space-y-3 mb-8 flex-1">
+            <AnimatedList className="!gap-3 mb-8 flex-1" delay={1200} cycleDuration={10000}>
               {workflowSteps.map((step, i) => (
                 <div key={step.label} className="flex items-center gap-3 p-3 rounded-lg bg-black/[0.02] border border-[var(--structural-border)]">
                   <span className="text-xs font-bold text-[var(--brand)] bg-[var(--brand-10)] px-2 py-1 rounded-md shrink-0">{String(i + 1).padStart(2, "0")}</span>
@@ -145,7 +152,7 @@ export default function TwoPaths() {
                   </div>
                 </div>
               ))}
-            </div>
+            </AnimatedList>
 
             <div className="space-y-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <Marquee pauseOnHover reverse className="[--duration:22s]">
