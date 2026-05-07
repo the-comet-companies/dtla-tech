@@ -66,8 +66,8 @@ export default function Navbar() {
               : "bg-white/60 backdrop-blur-md border-gray-200/60"
           }`}
         >
-          <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)] uppercase">
-            {navBrand.desktop}
+          <a href="#" className="px-4 py-2 text-sm font-bold tracking-tight text-[var(--text)]">
+            Shop <span className="text-[var(--brand)]">Titan</span>
           </a>
 
           <div className="w-px h-4 bg-[var(--structural-border)] mx-1" />
@@ -102,7 +102,7 @@ export default function Navbar() {
             className="text-base font-bold tracking-tight text-[var(--text)]"
             onClick={handleLinkClick}
           >
-            {navBrand.mobile}
+            Shop <span className="text-[var(--brand)]">Titan</span>
           </a>
 
           <button

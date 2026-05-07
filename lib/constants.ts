@@ -2,31 +2,44 @@
    CENTRALIZED CONTENT — edit all site copy here
    ================================================================ */
 
+// Every outbound CTA on this case-study page punts to Shop Titan's primary intake.
+const SHOP_TITAN_DEMO_HREF = "https://shoptitan.app/reach-out?ref=dtla-case-study";
+
 // ── Navigation ──
 export const navLinks = [
   { label: "Problem", href: "#problem" },
   { label: "Solutions", href: "#solutions" },
   { label: "Features", href: "#features" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#interest-form" },
 ];
 
 export const navBrand = {
-  desktop: "DTLA Print",
-  mobile: "DTLA Print",
-  ctaText: "Request Early Access",
-  ctaHref: "#interest-form",
+  desktop: "Shop Titan",
+  mobile: "Shop Titan",
+  ctaText: "Get a Demo",
+  ctaHref: SHOP_TITAN_DEMO_HREF,
 };
 
 // ── Hero ──
+// case-study reframe — H1 used to say "With Our" without naming Shop Titan; reader had to look at navbar to figure out who "Our" was
+// export const hero = {
+//   badge: "Case Study: DTLA Print",
+//   headingLine1: "Run Your Shop",
+//   headingLine2: "With Our",
+//   morphingWords: ["Systems", "Back Office", "Storefront", "Automations", "Tools"],
+//   subtitle:
+//     "Shop Titan is the platform behind DTLA Print's production flow — refined across thousands of real orders.",
+//   ctaPrimary: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
+//   ctaSecondary: { text: "See How It Works", href: "#solutions" },
+// };
 export const hero = {
-  badge: "From the team at DTLA Print",
+  badge: "Case Study: DTLA Print",
   headingLine1: "Run Your Shop",
-  headingLine2: "With Our",
+  headingLine2: "With Shop Titan's",
   morphingWords: ["Systems", "Back Office", "Storefront", "Automations", "Tools"],
   subtitle:
-    "Experience the tech stack behind DTLA Print’s production flow — refined across thousands of orders.",
-  ctaPrimary: { text: "Request Early Access", href: "#interest-form" },
+    "Shop Titan is the platform behind DTLA Print's production flow — refined across thousands of real orders.",
+  ctaPrimary: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
   ctaSecondary: { text: "See How It Works", href: "#solutions" },
 };
 
@@ -109,65 +122,105 @@ export const heroBentoCards = {
 };
 
 // ── Problems ──
+// case-study reframe — original was a generic prospect-pitch ("Sound familiar?"); recast as DTLA's pre-Shop-Titan reality
+// export const problemsSection = {
+//   label: "The Problem",
+//   watermark: "BROKEN SYSTEMS",
+//   typingWords: [
+//     "Sound familiar?",
+//     "Losing orders?",
+//     "Still using spreadsheets?",
+//     "Guessing where jobs are?",
+//     "Scaling feels impossible?",
+//   ],
+//   cta: { text: "See How Shop Titan Solves This", href: SHOP_TITAN_DEMO_HREF },
+// };
 export const problemsSection = {
-  label: "The Problem",
-  watermark: "BROKEN SYSTEMS",
+  label: "Where DTLA Started",
+  watermark: "BEFORE SHOP TITAN",
   typingWords: [
+    "Orders on whiteboards.",
+    "Pricing in spreadsheets.",
+    "Proofs lost in email.",
+    "Jobs tracked by memory.",
     "Sound familiar?",
-    "Losing orders?",
-    "Still using spreadsheets?",
-    "Guessing where jobs are?",
-    "Scaling feels impossible?",
   ],
-  cta: { text: "See How We Solve This", href: "#interest-form" },
+  cta: { text: "See How Shop Titan Solved This", href: SHOP_TITAN_DEMO_HREF },
 };
 
+// case-study reframe — descriptions rewritten as DTLA's past reality, not a generic prospect pitch
 export const painPoints = [
   {
     number: 1,
     title: "Disconnected Systems",
+    // original: "Orders here. Art there. Production on a whiteboard. Shipping in spreadsheets. Nothing connects."
     description:
-      "Orders here. Art there. Production on a whiteboard. Shipping in spreadsheets. Nothing connects.",
+      "Orders lived in one inbox. Art in another. Production on a whiteboard. Shipping in spreadsheets. Nothing talked to anything else.",
   },
   {
     number: 2,
     title: "No Real-Time Job Tracking",
+    // original: "No real visibility into job status. You're walking the floor, calling people, and guessing when customers ask."
     description:
-      "No real visibility into job status. You’re walking the floor, calling people, and guessing when customers ask.",
+      "DTLA had no live visibility into job status. The team walked the floor, made calls, and guessed at answers when customers asked where their order was.",
   },
   {
     number: 3,
-    title: "Manual Quoting Eating Up Time",
+    title: "Manual Quoting Ate Up Hours",
+    // original: "Every quote is built from scratch. Pricing is inconsistent, turnaround is slow, and you're losing deals to faster shops."
     description:
-      "Every quote is built from scratch. Pricing is inconsistent, turnaround is slow, and you're losing deals to faster shops.",
+      "Every quote was built from scratch. Pricing drifted from rep to rep, turnaround was slow, and faster shops were winning the deals that took too long to come back.",
   },
   {
     number: 4,
     title: "Art Approval Chaos",
+    // original: "Proofs sent via email, approvals lost in threads, revisions with no version control. Jobs go to production with the wrong art."
     description:
-      "Proofs sent via email, approvals lost in threads, revisions with no version control. Jobs go to production with the wrong art.",
+      "Proofs went out by email, approvals got lost in threads, revisions had no version control. Jobs occasionally hit production with the wrong art.",
   },
   {
     number: 5,
-    title: "Scaling Requires More Staff, Not Better Systems",
+    title: "Growth Meant More Headcount, Not Better Systems",
+    // original: "Growth adds complexity, more people, and more chaos — not systems that scale."
     description:
-      "Growth adds complexity, more people, and more chaos — not systems that scale.",
+      "Every new client added complexity, more hires, and more chaos. The shop was scaling people instead of scaling systems.",
   },
 ];
 
 
 
 // ── Two Paths ──
+// case-study reframe — original used generic "your customers / you control" with no DTLA reference; recast to anchor each side to DTLA's actual setup
+// export const twoPathsSection = {
+//   label: "The Connected Workflow",
+//   title: "Every stage. One system.",
+//   subtitle:
+//     "From the first order to the final shipment — see how both sides of the platform work together.",
+//   frontend: {
+//     tag: "Front End",
+//     title: "What Your Customers See",
+//     description:
+//       "The storefront, configurator, and portal your customers interact with — ordering, approving art, and tracking shipments.",
+//     ...
+//   },
+//   backend: {
+//     tag: "Back Office",
+//     title: "What You Control",
+//     description:
+//       "The engine behind every order — quoting, scheduling, production tracking, invoicing, and shipping from a single dashboard.",
+//     ...
+//   },
+// };
 export const twoPathsSection = {
   label: "The Connected Workflow",
   title: "Every stage. One system.",
   subtitle:
-    "From the first order to the final shipment — see how both sides of the platform work together.",
+    "From the first order to the final shipment — here's how both sides of Shop Titan run DTLA Print's daily operation.",
   frontend: {
     tag: "Front End",
-    title: "What Your Customers See",
+    title: "What DTLA's Customers See",
     description:
-      "The storefront, configurator, and portal your customers interact with — ordering, approving art, and tracking shipments.",
+      "The storefront, configurator, and portal DTLA's customers interact with — ordering, approving art, and tracking shipments on dtlaprint.com.",
     marqueeItems: [
       "Browse products",
       "Upload artwork",
@@ -179,9 +232,9 @@ export const twoPathsSection = {
   },
   backend: {
     tag: "Back Office",
-    title: "What You Control",
+    title: "What DTLA's Team Controls",
     description:
-      "The engine behind every order — quoting, scheduling, production tracking, invoicing, and shipping from a single dashboard.",
+      "The engine behind every DTLA order — quoting, scheduling, production tracking, invoicing, and shipping from a single dashboard.",
     marqueeItems: [
       "Route jobs",
       "Generate invoices",
@@ -233,16 +286,16 @@ export const tabbedFeaturesSection = {
   subtitle: "Switch between products to see what each one does for your shop.",
   tabs: {
     website: {
-      label: "Online Storefront",
+      label: "Shop Titan Storefront",
       mobileLabel: "Storefront",
-      cta: "See the Storefront",
+      cta: "See It Live on dtlaprint.com",
       href: "https://dtlaprint.com",
     },
     filemaker: {
-      label: "Shop Titan (FileMaker)",
-      mobileLabel: "Shop Titan",
+      label: "Shop Titan FileMaker",
+      mobileLabel: "FileMaker",
       cta: "Explore Shop Titan",
-      href: "https://shoptitan.app/",
+      href: "https://shoptitan.app/?ref=dtla-case-study",
     },
   },
 };
@@ -314,10 +367,17 @@ export const filemakerFeatures = [
 ];
 
 // ── Solutions Demo ──
+// case-study reframe — section header now anchors the demo to DTLA's actual deployment instead of a generic "scale with you" pitch
+// export const solutionsDemoSection = {
+//   label: "See It in Action",
+//   title: "Built to Scale With You",
+//   subtitle: "Start with what you need. Expand as you grow.",
+// };
 export const solutionsDemoSection = {
-  label: "See It in Action",
-  title: "Built to Scale With You",
-  subtitle: "Start with what you need. Expand as you grow.",
+  label: "DTLA in Action",
+  title: "How DTLA scaled — without scaling chaos",
+  subtitle:
+    "Every module below is live inside DTLA Print right now. Pick what your shop needs — start with one piece or run the full stack like DTLA does.",
 };
 
 export const solutionsDemoTabs = [
@@ -334,11 +394,13 @@ export const websiteDemoFeatures = [
     title: "Custom Storefront",
     painPoint: {
       label: "FRICTION",
-      description: "Generic templates that don't fit decoration. No way to showcase your work.",
+      // original: "Generic templates that don't fit decoration. No way to showcase your work."
+      description: "Generic templates that didn't fit decoration. No way for DTLA to showcase the work.",
     },
     solution: {
       label: "FIX",
-      description: "A branded storefront built for print shops. Designed to convert.",
+      // original: "A branded storefront built for print shops. Designed to convert."
+      description: "A branded storefront tailored to DTLA's catalog and audience. Designed to convert.",
     },
     imageSrc: "/demos/website/StoreFront.png",
     browserUrl: "dtlaprint.com",
@@ -350,7 +412,8 @@ export const websiteDemoFeatures = [
     title: "Product Catalog",
     painPoint: {
       label: "FRICTION",
-      description: "Customers can't see what you carry — so they call, email, or go elsewhere.",
+      // original: "Customers can't see what you carry — so they call, email, or go elsewhere."
+      description: "Customers couldn't see what DTLA carried — so they called, emailed, or went elsewhere.",
     },
     solution: {
       label: "FIX",
@@ -366,7 +429,8 @@ export const websiteDemoFeatures = [
     title: "Brands",
     painPoint: {
       label: "FRICTION",
-      description: "Customers don't know what blanks you stock.",
+      // original: "Customers don't know what blanks you stock."
+      description: "Customers couldn't tell what blanks DTLA stocked.",
     },
     solution: {
       label: "FIX",
@@ -386,7 +450,8 @@ export const websiteDemoFeatures = [
     },
     solution: {
       label: "FIX",
-      description: "Drag-and-drop upload right on your site. No more email chains.",
+      // original: "Drag-and-drop upload right on your site. No more email chains."
+      description: "Drag-and-drop upload right on dtlaprint.com. No more email chains.",
     },
     imageSrc: "/demos/website/DragAndDrop.png",
     browserUrl: "dtlaprint.com/upload",
@@ -398,7 +463,8 @@ export const websiteDemoFeatures = [
     title: "Services",
     painPoint: {
       label: "FRICTION",
-      description: "Customers can't tell what decoration methods you offer.",
+      // original: "Customers can't tell what decoration methods you offer."
+      description: "Customers couldn't tell what decoration methods DTLA offered.",
     },
     solution: {
       label: "FIX",
@@ -430,7 +496,8 @@ export const websiteDemoFeatures = [
     title: "SEO & Analytics",
     painPoint: {
       label: "FRICTION",
-      description: "Competitors rank above you. No data on who visits or converts.",
+      // original: "Competitors rank above you. No data on who visits or converts."
+      description: "Competitors ranked above DTLA. No data on who visited or converted.",
     },
     solution: {
       label: "FIX",
@@ -446,7 +513,8 @@ export const websiteDemoFeatures = [
     title: "Mobile Responsive",
     painPoint: {
       label: "FRICTION",
-      description: "60% of traffic is mobile. Your site breaks on phones.",
+      // original: "60% of traffic is mobile. Your site breaks on phones."
+      description: "60% of traffic is mobile. DTLA's previous site broke on phones.",
     },
     solution: {
       label: "FIX",
@@ -530,7 +598,8 @@ export const filemakerDemoFeatures = [
     title: "Task Types",
     painPoint: {
       label: "FRICTION",
-      description: "Rigid software that can't fit your workflow.",
+      // original: "Rigid software that can't fit your workflow."
+      description: "Rigid software that couldn't fit DTLA's workflow.",
     },
     solution: {
       label: "FIX",
@@ -643,7 +712,7 @@ export const aiPlatformSection = {
   label: "AI-Powered",
   title: "AI-Powered Platform",
   subtitle:
-    "Our website and FileMaker system are integrated with leading AI models. From smart product descriptions and automated customer responses to intelligent order processing and predictive analytics.",
+    "Shop Titan's storefront and FileMaker system are integrated with leading AI models — smart product descriptions, automated customer responses, intelligent order processing, and predictive analytics.",
 };
 
 export const aiModels = [
@@ -676,19 +745,27 @@ export const aiCapabilities = [
   },
 ];
 
+// case-study reframe — was a "choose your plan" pitch; now describes the stack DTLA runs (and what's available to other shops)
+// export const whatsAvailableSection = {
+//   label: "What You Get",
+//   title: "Choose what you need",
+//   subtitle:
+//     "Shop Titan offers three ways to run your shop — license the FileMaker back office, the website platform, or the full stack with automatic integrations.",
+//   cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
+// };
 export const whatsAvailableSection = {
-  label: "What You Get",
-  title: "Choose what you need",
+  label: "What DTLA Runs",
+  title: "The full stack — live in production",
   subtitle:
-    "License our FileMaker back end, our website technology, or get the full stack with automatic integrations.",
-  cta: { text: "Request Early Access", href: "#interest-form" },
+    "DTLA Print runs all three modules end-to-end: the FileMaker back office, the customer-facing website, and the integrations layer that ties them together. Each module is also available standalone.",
+  cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
 };
 
 export const offerings = [
   {
     title: "FileMaker Business Management",
     description:
-      "A complete back-office system purpose-built for decoration shops.",
+      "Shop Titan's complete back-office system, purpose-built for decoration shops.",
     bullets: [
       "Order management & invoicing",
       "Production scheduling & tracking",
@@ -699,7 +776,7 @@ export const offerings = [
   {
     title: "Website & Customer Portal",
     description:
-      "A clone of our production-tested e-commerce and customer-facing platform.",
+      "Shop Titan's production-tested e-commerce and customer-facing platform — the same system running dtlaprint.com.",
     bullets: [
       "Online ordering & quoting",
       "Art approval portal",
@@ -721,12 +798,20 @@ export const offerings = [
 ];
 
 // ── Features ──
+// case-study reframe — sharpened subtitle to make DTLA-as-customer, not DTLA-as-vendor
+// export const featuresSection = {
+//   label: "Features",
+//   title: "Built for production shops",
+//   subtitle:
+//     "Every feature in Shop Titan is stress-tested daily by working print shops — including DTLA Print, where the platform was hardened across thousands of orders.",
+//   cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
+// };
 export const featuresSection = {
   label: "Features",
-  title: "Built for production shops",
+  title: "The modules DTLA uses every day",
   subtitle:
-    "Every feature was built to solve a real problem we faced running DTLA Print.",
-  cta: { text: "Get Started With These Features", href: "#interest-form" },
+    "These are the same features running inside DTLA Print right now — refined across thousands of real orders before they were rolled out to other shops.",
+  cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
 };
 
 export const features = [
@@ -763,20 +848,29 @@ export const features = [
 ];
 
 // ── Built By Operators ──
+// case-study reframe — sharpened description to put DTLA on the customer side of the relationship
+// export const builtByOperatorsSection = {
+//   badge: "Built by operators, for operators",
+//   titleLine1: "This isn't theory.",
+//   titleLine2: "It's battle-tested daily.",
+//   description:
+//     "Stress-tested every day inside DTLA Print, a real high-volume shop running every Shop Titan module — fewer mistakes, less back-and-forth, full visibility across the operation.",
+//   cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
+// };
 export const builtByOperatorsSection = {
-  badge: "Built by operators, for operators",
+  badge: "DTLA Print runs the full Shop Titan stack",
   titleLine1: "This isn't theory.",
   titleLine2: "It's battle-tested daily.",
   description:
-    "Built inside a real, high-volume shop. Less back-and-forth, fewer mistakes, and full visibility across your operation.",
-  cta: { text: "Get These Systems For Your Shop", href: "#interest-form" },
+    "DTLA Print is one of Shop Titan's flagship customers — a real high-volume decoration shop running every module in production. Fewer mistakes, less back-and-forth, full visibility across the operation.",
+  cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
 };
 
 export const operatorStats = [
-  { value: "1000", suffix: "s+", label: "Orders Processed" },
-  { value: "78", suffix: "+", label: "AI Agents" },
+  { value: "1000", suffix: "s+", label: "Orders Processed" }, // TODO: confirm DTLA's actual lifetime order count or swap for a verified number
+  { value: "78", suffix: "+", label: "AI Agents" }, // TODO: confirm exact agent count currently deployed
   { value: "24", suffix: "/7", label: "System Uptime" },
-  { value: "12", suffix: "+", label: "Years Battle-Tested" },
+  { value: "12", suffix: "+", label: "Years Battle-Tested" }, // confirmed by Kyle 2026-05-06
 ];
 
 // ── Social Proof ──
@@ -787,6 +881,8 @@ export const socialProofSection = {
     "No demos. No cherry-picked screenshots. Just what print and embroidery shops say after using it.",
 };
 
+// FAKE — DO NOT SHIP. SocialProof section is currently hidden in app/page.tsx because these names/companies are fabricated.
+// Replace this entire array with one or two REAL DTLA Print quotes (Mika, ops lead, or a named DTLA client) before re-enabling the section.
 export const testimonials = [
   {
     quote:
@@ -830,8 +926,8 @@ export const whoThisIsForSection = {
   label: "Who This Is For",
   title: "Built for every decoration method",
   subtitle:
-    "Whether you're running a single press or multiple facilities, our systems scale with you.",
-  cta: { text: "Request Early Access", href: "#interest-form" },
+    "Whether you're running a single press or multiple facilities, Shop Titan scales with you.",
+  cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
   codes: ["SP", "EM", "DG", "PD", "ML"],
 };
 
@@ -864,7 +960,7 @@ export const techStackSection = {
   title: "Works with the tools you already use",
   subtitle:
     "Everything is pre-connected and ready to go — payments, shipping, marketplaces, and more.",
-  cta: { text: "Request Early Access", href: "#interest-form" },
+  cta: { text: "Get a Demo", href: SHOP_TITAN_DEMO_HREF },
 };
 
 export const techStackCards = [
@@ -1004,9 +1100,9 @@ export const orderVolumeOptions = [
 
 // ── Footer ──
 export const footer = {
-  brand: "DTLA PRINT",
-  siteUrl: "https://dtlaprint.com",
-  siteLabel: "dtlaprint.com",
-  ctaText: "Interested in our tech stack?",
-  ctaHref: "#interest-form",
+  brand: "SHOP TITAN",
+  siteUrl: "https://shoptitan.app",
+  siteLabel: "shoptitan.app",
+  ctaText: "Case study: DTLA Print",
+  ctaHref: "https://dtlaprint.com",
 };

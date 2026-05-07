@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="w-full max-w-[80rem] mx-auto px-[var(--container-padding-x)] flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <span className="text-base font-bold tracking-tight text-[var(--text)]">
-            {footer.brand}
+            Shop <span className="text-[var(--brand)]">Titan</span>
           </span>
           <span className="text-sm text-[var(--text-muted)]">
             &copy; {new Date().getFullYear()}
@@ -23,6 +23,8 @@ export default function Footer() {
           </a>
           <a
             href={footer.ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group text-sm text-[var(--text-secondary)] hover:text-[var(--brand)] transition-colors duration-200 flex items-center gap-1.5"
           >
             {footer.ctaText}
